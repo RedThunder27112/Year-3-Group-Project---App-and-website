@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_splashscreen">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.lambdapp_androidapp_d2.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_completed_tasks"
+        android:name="com.example.lambdapp_androidapp_d2.ui.completedtasks.CompletedTasksFragment"
+        android:label="@string/completed_tasks"
+        tools:layout="@layout/fragment_completed_tasks" >
+        <action
+            android:id="@+id/action_nav_completed_tasks_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_setting"
+        android:label="Settings"
+        android:name="com.example.lambdapp_androidapp_d2.ui.SettingsFragment"
+        tools:layout="@layout/fragment_settings" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_update_timeline"
+        android:label="Timeline Update"
+        android:name="com.example.lambdapp_androidapp_d2.ui.UpdateTimeLineFragment"
+        tools:layout="@layout/fragment_update_time_line" >
+        <action
+            android:id="@+id/action_nav_update_timeline_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_addTimelineUpdate"
+        android:name="com.example.lambdapp_androidapp_d2.ui.addtimelineupdate.AddTimelineUpdateFragment"
+        android:label="Add Timeline Update"
+        tools:layout="@layout/fragment_add_timeline_update">
+        <action
+            android:id="@+id/action_nav_addTimelineUpdate_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_request_stock"
+        android:label="Request Stock"
+        android:name="com.example.lambdapp_androidapp_d2.ui.requests.RequestStockFragment"
+        tools:layout="@layout/fragment_request_stock" >
+        <action
+            android:id="@+id/action_nav_request_stock_to_nav_request"
+            app:destination="@id/nav_request" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_request_Equipment"
+        android:label="Request Equipment"
+        android:name="com.example.lambdapp_androidapp_d2.ui.requests.RequestEqpFragment"
+        tools:layout="@layout/fragment_request_equipment" >
+        <action
+            android:id="@+id/action_nav_request_Equipment_to_nav_request"
+            app:destination="@id/nav_request" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_request"
+        android:label="Request Stock or Equipment"
+        android:name="com.example.lambdapp_androidapp_d2.ui.requests.RequestFragment"
+        tools:layout="@layout/fragment_request" >
+        <action
+            android:id="@+id/action_nav_request_to_nav_request_stock"
+            app:destination="@id/nav_request_stock" />
+        <action
+            android:id="@+id/action_nav_request_to_nav_request_Equipment"
+            app:destination="@id/nav_request_Equipment" />
+        <action
+            android:id="@+id/action_nav_request_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.lambdapp_androidapp_d2.ui.login.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_nav_login_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_login_to_nav_registration"
+            app:destination="@id/nav_registration" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_registration"
+        android:name="com.example.lambdapp_androidapp_d2.ui.registration.RegistrationFragment"
+        android:label="@string/menu_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_nav_registration_to_nav_login"
+            app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_nav_registration_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.lambdapp_androidapp_d2.ui.userinfo.userinfoFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_userinfo" >
+        <action
+            android:id="@+id/action_nav_gallery_to_nav_updateProfileParent"
+            app:destination="@id/nav_updateProfileParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_updateProfile"
+        android:name="com.example.lambdapp_androidapp_d2.ui.updateUserDetails.UpdateProfile"
+        android:label="Update Details"
+        tools:layout="@layout/fragment_update_profile" >
+        <action
+            android:id="@+id/action_nav_updateProfile_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+        <action
+            android:id="@+id/action_nav_updateProfile_to_nav_userinfoParent"
+            app:destination="@id/nav_userinfoParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_updateProfileRating"
+        android:name="com.example.lambdapp_androidapp_d2.ui.updateUserDetails.UpdateProfileRatingFragment"
+        android:label="Update Rating"
+        tools:layout="@layout/fragment_update_profile_rating" />
+
+
+    <fragment
+        android:id="@+id/nav_updateProfileParent"
+        android:name="com.example.lambdapp_androidapp_d2.ui.updateUserDetails.UpdateProfileParent"
+        android:label="Update Profile"
+        tools:layout="@layout/fragment_update_profile_parent" >
+        <action
+            android:id="@+id/action_nav_updateProfileParent_to_nav_updateProfileRating"
+            app:destination="@id/nav_updateProfileRating" />
+        <action
+            android:id="@+id/action_nav_updateProfileParent_to_nav_updateProfile"
+            app:destination="@id/nav_updateProfile" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_notifications"
+        android:name="com.example.lambdapp_androidapp_d2.ui.Notifications.NotificationFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_nav_notifications_to_nav_feedback"
+            app:destination="@id/nav_feedback" />
+        <action
+            android:id="@+id/action_nav_notifications_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_feedback"
+        android:name="com.example.lambdapp_androidapp_d2.ui.rating.FeedbackFragment"
+        android:label="Feedback and Ratings"
+        tools:layout="@layout/fragment_feedback" >
+        <action
+            android:id="@+id/action_nav_feedback_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_feedback_to_nav_notifications"
+            app:destination="@id/nav_notifications" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_taskDetailsParent"
+        android:name="com.example.lambdapp_androidapp_d2.ui.taskDetails.TaskDetailsParent"
+        android:label="Task Details"
+        tools:layout="@layout/fragment_task_details_parent" >
+        <action
+            android:id="@+id/action_nav_taskDetailsParent_to_nav_request"
+            app:destination="@id/nav_request" />
+        <action
+            android:id="@+id/action_nav_taskDetailsParent_to_nav_addTimelineUpdate"
+            app:destination="@id/nav_addTimelineUpdate" />
+        <action
+            android:id="@+id/action_nav_taskDetailsParent_to_nav_update_timeline"
+            app:destination="@id/nav_update_timeline" />
+        <action
+            android:id="@+id/action_nav_taskDetailsParent_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_taskDetailsResources"
+        android:name="com.example.lambdapp_androidapp_d2.ui.taskDetails.TaskDetailsResourcesFragment"
+        android:label="Task Details"
+        tools:layout="@layout/fragment_task_details_resources" />
+
+    <fragment
+        android:id="@+id/nav_taskDetails"
+        android:name="com.example.lambdapp_androidapp_d2.ui.taskDetails.TaskDetailsFragment"
+        android:label="Task Details"
+        tools:layout="@layout/fragment_task_details" />
+
+    <fragment
+        android:id="@+id/nav_requestApproval"
+        android:name="com.example.lambdapp_androidapp_d2.ui.admin.requestApproval.RequestApprovalFragment"
+        android:label="Request Approval"
+        tools:layout="@layout/fragment_request_approval" />
+
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="com.example.lambdapp_androidapp_d2.ui.calendar.CalendarFragment"
+        android:label="@string/menu_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_nav_calendar_to_nav_taskDetailsParent"
+            app:destination="@id/nav_taskDetailsParent" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.lambdapp_androidapp_d2.ui.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_userinfo">
+        <action
+            android:id="@+id/action_nav_logout_to_nav_splashscreen"
+            app:destination="@id/nav_splashscreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_selfreflection"
+        android:label="Self Reflection"
+        android:name="com.example.lambdapp_androidapp_d2.ui.userinfo.userinfoselfreflectionFragment"
+        tools:layout="@layout/fragment_userinfo_selfreflection" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_userinfoParent"
+        android:label="User Profile"
+        android:name="com.example.lambdapp_androidapp_d2.ui.userinfo.userinfoParent">
+        <action
+            android:id="@+id/action_nav_userinfoParent_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+        <action
+            android:id="@+id/action_nav_userinfoParent_to_nav_selfreflection"
+            app:destination="@id/nav_selfreflection" />
+        <action
+            android:id="@+id/action_nav_userinfoParent_to_nav_updateProfileParent"
+            app:destination="@id/nav_updateProfileParent" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_splashscreen"
+        android:name="com.example.lambdapp_androidapp_d2.ui.SplashScreenFragment"
+        android:label="@string/menu_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_nav_splashscreen_to_nav_login"
+            app:destination="@id/nav_login" />
+    </fragment>
+
+</navigation>

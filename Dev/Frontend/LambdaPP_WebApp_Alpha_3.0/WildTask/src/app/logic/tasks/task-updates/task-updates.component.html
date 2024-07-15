@@ -1,0 +1,73 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../task-detail', taskID]"  pButton pRipple type="button" class="p-button p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+</div>
+
+<div class="mb-2">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+
+
+<section class="timeline-section">
+    <div class="flex justify-content-between align-items-center">
+        <div>
+            <h3 *ngIf="myTask != undefined"> {{ myTask.task_Name }}: </h3>
+            <h5 *ngIf="myTask != undefined">Deadline:  {{ myTask.task_Deadline | date }} </h5>
+        </div>
+        <div (click)="show()" style="cursor: pointer;">
+            <p-avatarGroup styleClass="mb-3">
+                <ng-container *ngFor="let e of employees">
+                    <p-avatar [image]="e.emp_ID_Image" size="xlarge" shape="circle"></p-avatar>
+                </ng-container>
+            </p-avatarGroup>
+        </div>
+    </div>
+    <div class="mb-8" *ngIf="taskUpdates != undefined">
+        <ng-container *ngFor="let up of taskUpdates">
+            <div class="timeline-item">
+                <h5>{{ up.update_Description }}</h5>
+                <div class="flex justify-content-between mr-5">
+                    <div>                        
+                        {{ betterDate(up.update_Time) }}                        
+                        <p class="">Posted by {{ up.employee.emp_Name }} {{ up.employee.emp_Sur }}</p>
+
+                        <p-avatar [image]="up.employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar>
+                    </div>
+
+                    <div class="card" *ngIf="up.update_Picture != null">
+                        <div>
+                            <p-image [src]="up.update_Picture" alt="Image" width="120"
+                                [preview]="true"></p-image>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div *ngIf="up.update_Location !== null">
+                            <button (click)="locationShow(up.up_Lat, up.up_Long)" pButton>
+                                <i class="fa fa-map-marker mr-2" aria-hidden="true"></i>
+                                Location
+                            </button>
+                        </div>
+                        <div *ngIf="up.update_Location == null">
+                            <button pButton disabled="true">
+                                <i class="fa fa-map-marker mr-2" aria-hidden="true"></i>
+                                Location
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template [ngIf]="this.taskUpdates != undefined">
+            <ng-template [ngIf]="this.taskUpdates.length == 0">
+                <div class="text-center">
+                    <img class="w-2 h-2 mb-5" src="assets/pic.png" alt="">
+                    <h4 class="d-flex justify-content-center">No updates as yet, you'll be notified if a new update comes along!</h4>
+                </div>
+            </ng-template>
+        </ng-template>
+    </div>
+</section>

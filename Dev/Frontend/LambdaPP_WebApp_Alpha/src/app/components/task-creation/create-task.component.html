@@ -1,0 +1,45 @@
+<h2>Create Task</h2>
+
+<form (ngSubmit)="onSubmit()" class="task-form" style="margin-top: 50px;">
+  <div class="form-group">
+    <label for="taskName">Task Name:</label>
+    <input type="text" id="taskName" [(ngModel)]="task.task_Name" name="taskName" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="task.task_Description" name="description" required></textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" [(ngModel)]="task.task_Date_Started" name="startDate" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="deadline">Deadline:</label>
+    <input type="date" id="deadline" [(ngModel)]="task.task_Deadline" name="deadline" required>
+  </div>
+
+  <div class="form-group">
+    <label for="skills">Skills:</label>
+    <div *ngFor="let skill of skills">
+      <label>
+        <input type="checkbox" name="skills" [value]="skill">
+        {{ skill.skill_Name }}
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="employees">Employees:</label>
+    <div *ngFor="let employee of employees">
+      <label>
+        <input type="checkbox" name="employees" [(ngModel)]="employee.checked" [value]="employee">
+        {{ employee.emp.emp_Name }} {{ employee.emp.emp_Sur}}
+      </label>
+    </div>
+  </div>
+  
+  <button type="submit">Create Task</button>
+</form>

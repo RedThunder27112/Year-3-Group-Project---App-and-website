@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.requests.RequestStockFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stockRecycler"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtStockName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/txtQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="14dp"
+        android:autofillHints="quantity"
+        android:fontFamily="@font/maven_pro"
+        android:hint="@string/quantity"
+        android:inputType="number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStockName" />
+
+    <Button
+        android:id="@+id/btnRequest"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/PastelRed"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/request_stock"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtQuantity"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+
+    <TextView
+        android:id="@+id/txtStockName"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="14dp"
+        android:fontFamily="@font/maven_pro"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/stockRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stockRecycler" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,37 @@
+<progress-spinner *ngIf="isLoading"></progress-spinner>
+
+<div class="container">
+    <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <mat-card-header>
+        <img mat-card-image src="assets/logo.png" style="width:100px; margin-top: 20px; text-align: center;">
+        <mat-card-title>Log In</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="loginform" class="example-form" (ngSubmit)="onLogin()">
+        <mat-card-content>
+            <mat-form-field [hideRequiredMarker]="true" appearance="outline" class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" type="email" matInput required>
+                <mat-error style="color: red;" *ngIf="(loginform.controls['email'].touched || loginform.controls['email'].dirty) && loginform.hasError('required', 'email')">email is required</mat-error>
+                <!-- <mat-error style="color: red;" *ngIf="loginform.hasError('email', 'email')">email is invalid</mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field [hideRequiredMarker]="true" appearance="outline" class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput required [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error style="color: red;" *ngIf="(loginform.controls['password'].touched || loginform.controls['password'].dirty) && loginform.hasError('required', 'password')">password is required</mat-error>
+            </mat-form-field>
+
+            <div class="md-3" style="text-align: center;">
+                <p [routerLink]="['login']">Not registered? Register <a [routerLink]="['/register']">here</a></p>
+            </div>
+
+        </mat-card-content>
+        <button mat-raised-button color="primary" class="btn-block">Log in</button>
+        </form>
+    </mat-card>
+</div>
+</div>

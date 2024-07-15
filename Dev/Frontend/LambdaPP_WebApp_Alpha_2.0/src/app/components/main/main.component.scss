@@ -1,0 +1,28 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.my-button {
+    justify-content: flex-end;
+    text-align: right;
+    color: #fff;
+}
+
+.custom-button:hover {
+    background-color: crimson;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.my-button:hover {
+    // outline: none;
+    // box-shadow: none;
+    background-color: rgb(100, 205, 205);
+}
+
+.activebutton {
+    background-color: rgb(100, 205, 205);
+}
+
+.propic {
+    cursor: pointer;
+}

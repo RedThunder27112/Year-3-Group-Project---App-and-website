@@ -1,0 +1,86 @@
+<div class="grid p-fluid">
+    <div class="col-12 lg:col-6 xl:col-12 flex justify-content-between align-items-center">
+        <div>
+            <button style="height:2.5rem" [routerLink]="['../']"  pButton pRipple type="button" class="p-button p-button-secondary">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+                <div style="margin-left: 1rem;">Back</div> 
+            </button>
+        </div>
+        <div class="mx-auto p-fluid">
+            <h3 class="text-center">Reports</h3>
+            <p-menubar [model]="tieredItems">
+            </p-menubar>
+        </div>
+        <div></div>
+    </div>       
+
+    <div [hidden]="!employeeDisplay" class="col-12 lg:col-12 xl:col-12 mb-4">
+        <div class="flex p-4">
+            <div class="col-12 lg:col-9 xl:col-9 mx-auto p-fluid">
+                <div class="text-center mx-auto p-fluid">
+                    <h5>{{graphTitle}}</h5>
+                    <div class="flex justify-content-center mb-4">
+                        <p-dropdown [(ngModel)]="employee" (click)="activateRatingBtn()" [options]="employees" placeholder="Select Employee" class="mr-3"
+                            optionLabel="emp_Name" [filter]="true" filterBy="emp_Name" [showClear]="true">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2">
+                                    <span>{{ employee.emp_Name }} {{ employee.emp_Sur }}</span>
+                                </div>
+                            </ng-template>
+                            <ng-template let-e pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <img [src]="e.emp_ID_Image" [alt]="e.emp_Name" class="table-image">
+                                    <span>{{ e.emp_Name }} {{ e.emp_Sur }}</span>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+
+                        <p-dropdown [(ngModel)]="actER" [options]="activities" placeholder="Select Activity" class="mr-3"
+                            optionLabel="act_Name" [filter]="true" filterBy="act_Name" [showClear]="true">
+                        </p-dropdown>
+                        
+                        <div [hidden]="!ratingOverTimeBtn" class="mr-3">
+                            <button pButton (click)="getRatingOverTime()">Generate Graph</button>
+                        </div>
+                        <div [hidden]="!ratingOverTimeBtn">
+                            <button pButton (click)="clearRatingFilters()" class="p-button p-button-secondary">
+                                <i class="pi pi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <p-chart type="line" [data]="ratingBarData" [options]="ratingBarOptions"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div [hidden]="!taskDisplay" class="col-12 lg:col-12 xl:col-12 mb-4">
+        <div class="flex p-4">
+            <div class="col-12 lg:col-9 xl:col-9 mx-auto p-fluid">
+                <div class="text-center">
+                    <h5>{{graphTitle}}</h5>
+                    <!-- <div class="flex justify-content-center mb-4">
+                        <p-button (click)="tasksThreeMonths()" class="p-button-rounded ml-3">3 months</p-button>
+                        <p-button (click)="taskSixMonths()" class="p-button-rounded ml-3">6 months</p-button>
+                        <p-button class="p-button-rounded ml-3">12 months</p-button>
+                    </div> -->
+
+                    <p-chart type="line" [data]="tasksBarData" [options]="tasksBarOptions"></p-chart>
+                </div>
+            </div>
+
+            <!-- <div class="col-12 lg:col-6 xl:col-6">
+                <div class="flex flex-column align-items-center">
+                    <h5 class="text-center w-full mb-5">Admin, Contractor & Employee Ratio</h5>
+                    <p-chart type="pie" [data]="pieData" [options]="pieOptions"></p-chart>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="text-center mx-auto p-fluid col-12 lg:col-12 xl:col-12 mt-5" *ngIf="!display">
+        <img class="w-2 h-2 mb-5" src="assets/pic.png" alt="">
+        <h4 class="justify-content-center">No graph selected</h4>
+    </div>
+</div>

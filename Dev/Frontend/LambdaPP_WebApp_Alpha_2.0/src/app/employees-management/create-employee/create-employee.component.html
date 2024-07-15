@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-between mb-3">
+    <button (click)="goBack()" mat-raised-button color="accent" style="align-self: flex-start;">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>  
+        Back
+    </button>
+
+    <div></div>
+
+</div>
+<h2 style="text-align: center;">
+    Generate New Registration Code
+</h2>
+
+<div>
+    <form [formGroup]="createEmployeeCodeForm" #formDirective="ngForm" (ngSubmit)="getRegistrationCode(formDirective)">
+        <div class="row">
+            <!-- <div class="col-md-6">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>Employee Name</mat-label>
+                    <input formControlName="name" matInput placeholder="Employee Name">
+                    <mat-error style="color: red;" *ngIf="(createEmployeeCodeForm.controls['name'].touched || createEmployeeCodeForm.controls['name'].dirty) && createEmployeeCodeForm.hasError('required', 'name')">name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>Employee Surname</mat-label>
+                    <input formControlName="surname" matInput placeholder="Employee Surname">
+                    <mat-error style="color: red;" *ngIf="(createEmployeeCodeForm.controls['surname'].touched || createEmployeeCodeForm.controls['surname'].dirty) && createEmployeeCodeForm.hasError('required', 'surname')">surname is required</mat-error>
+                </mat-form-field>
+            </div> -->
+
+            <div class="col-md-12 mt-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" matInput>
+                    <mat-error style="color: red;" *ngIf="(createEmployeeCodeForm.controls['email'].touched || createEmployeeCodeForm.controls['email'].dirty) && createEmployeeCodeForm.hasError('required', 'email')">email is required</mat-error>
+                    <mat-error style="color: red;" *ngIf="createEmployeeCodeForm.hasError('email', 'email')">email is invalid</mat-error>
+                </mat-form-field>
+            </div>
+            
+            
+            <div class="col-md-12 mt-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Employee Role</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option *ngFor="let element of roles" [value]="element">{{element}}</mat-option>
+                    </mat-select>
+                    <mat-error style="color: red;" *ngIf="(createEmployeeCodeForm.controls['role'].touched || createEmployeeCodeForm.controls['role'].dirty) && createEmployeeCodeForm.hasError('required', 'role')">role is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12 mt-2" [hidden]="this.createEmployeeCodeForm.value?.role != 'Contractor'">
+                <mat-form-field>
+                  <mat-label>Contractor Expiry Date</mat-label>
+                  <input
+                    formControlName="contractor_expiry"
+                    matInput
+                    [min]="todayDate"
+                    [matDatepicker]="pickerStart"
+                  />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="pickerStart"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker
+                    #pickerStart
+                  ></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <!-- <div class="col-md-12 mt-3">
+                <mat-checkbox></mat-checkbox>
+                <mat-label>Do you want to send the code via email?</mat-label>
+            </div> -->
+
+        </div>
+        <button class="col-md-2 mt-3" mat-raised-button color="primary">Send Code</button>
+    </form>
+</div>

@@ -1,0 +1,65 @@
+.timeline-section {
+	margin-top: 20px;
+}
+
+.timeline-item {
+
+	// display: flex;
+	// align-items: flex-start;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 16px;
+}
+
+.timeline-dot {
+	width: 12px;
+	height: 12px;
+	background-color: #000;
+	border-radius: 50%;
+	margin-right: 16px;
+}
+
+.timeline-date {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 8px;
+}
+
+.timeline-content {
+	flex: 1;
+}
+
+.timeline-content h3 {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+
+.timeline-content p {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 16px;
+}
+
+.map-container {
+	width: 100%;
+	height: 250px;
+}
+
+.empty-updates {
+	margin-top: 20px;
+	font-size: 16px;
+	color: #999;
+}
+
+.content-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.content-wrapper h3,
+.content-wrapper p {
+	margin: 8px 0;
+	text-align: center;
+}

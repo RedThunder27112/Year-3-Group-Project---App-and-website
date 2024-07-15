@@ -1,0 +1,370 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../../tasks']" pButton pRipple type="button" class="p-button p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <button style="height:2.5rem"  [routerLink]="['../../task-edit', taskID]" pButton pRipple type="button" class="p-button">
+        <i class="fa fa-pencil" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Edit</div> 
+    </button>
+</div>
+
+<div class="mb-2">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="grid">
+    <div class="col-12">
+		<div class="card" *ngIf="task != undefined">
+                <h3>{{ myTaskName }}</h3>
+                <br>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-4" *ngIf="myActivity != undefined">
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Activity:</span>
+                        <span class="mt-1 text-600">{{myActivity.act_Name}}</span>
+                        <!-- <input [(ngModel)]="myActivity.act_Name" name="myActivit,act_Namey" pInputText id="lastname2" type="text" /> -->
+                    </div>
+                    <div  class="field col-12 md:col-4">
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Status: </span>
+
+                        <p-tag [value]="task.status.status_Name" [severity]="getSeverity(task.status.status_Name)"></p-tag>
+                    </div>
+
+                    <div class="field col-12  md:col-4">
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Length:</span>
+                        <span class="mt-1 text-600">{{compareDays(myEndDate, myStartDate)}} days</span>
+                        <span class="mt-1 text-600" *ngIf="task.status.status_Name == 'COMPLETED'">
+                            <span  *ngIf="compareDays(latestUpdateDay, myStartDate) > compareDays(myEndDate, myStartDate) else completedBeforeDeadline">  
+                                <span class="mt-1 text-red-600">    (Completed in </span>
+                                <span class="text-red-600 font-medium mr-2 mb-1 md:mb-0">{{compareDays(latestUpdateDay, myStartDate)}}</span>
+                                <span class="mt-1 text-red-600">days)</span>
+                            </span> 
+                            <ng-template #completedBeforeDeadline>
+                                <span>
+                                    <span class="mt-1 text-green-600">    (Completed in </span>
+                                    <span class="text-green-600 font-medium mr-2 mb-1 md:mb-0">{{compareDays(latestUpdateDay, myStartDate)}}</span> 
+                                    <span class="mt-1 text-green-600">days)</span>
+                                </span>      
+                            </ng-template></span>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Start Date:</span>
+                        <span class="mt-1 text-600">{{myStartDate | date}} </span>
+                        
+                    </div>
+                    <div class="field col-12  md:col-4">
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">End Date:</span>
+                        <span class="mt-1 text-600">{{myEndDate | date}}</span>
+                        <span *ngIf="task.status.status_Name != 'COMPLETED'">
+                           
+                            <span  *ngIf="compareDays(todayDate, myEndDate) > 0 else deadlineNotInFuture">  
+                                <span class="mt-1 text-red-600">(</span>
+                                <span class="text-red-600 font-medium mr-2 mb-1 md:mb-0">{{compareDays(todayDate, myEndDate)}}</span>
+                                <span class="mt-1 text-red-600">days late already!)</span>
+                            </span> 
+                            <ng-template #deadlineNotInFuture>
+                            <span *ngIf="compareDays(todayDate, myEndDate) < 0 else taskDeadlineToday">
+                                <span class="mt-1 text-green-600">    (</span>
+                                <span class="text-green-600 font-medium mr-2 mb-1 md:mb-0">{{-compareDays(todayDate, myEndDate)}}</span> 
+                                <span class="mt-1 text-green-600">days until deadline!)</span>
+                            </span>    
+                               
+                            </ng-template>   
+                            <ng-template #taskDeadlineToday>
+                                <span class="text-green-500 font-medium">   (Due Today!)</span> 
+                            </ng-template> 
+                        </span>
+                        
+                    </div>                 
+
+                    
+                    <div class="field col-12">
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Description:</span> <br><br>
+                        <span class="mt-1 text-600">{{myTaskDesc}}</span>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="field col-12">
+                        <div class="text-900 font-medium mr-2 mb-1 md:mb-0">Skills needed:</div><br>
+
+                        <div *ngIf="mySkills.length > 0 else elseNoSkillsBlock">
+    
+                            <div class="mt-3">
+                                <ul class="list-none p-0 m-0">
+                                    <li *ngFor="let s of mySkills" class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                                        <div>
+                                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0 ml-3">{{ s.skill_Name }}</span>
+                                            <div class="mt-1 text-600 ml-3">{{ s.skill_Description }}</div>
+                                            <!--Breakdown the skills level we actually have assigned to the task-->
+                                            <div *ngIf="s.Employee_Skill_Bridges != undefined else elseNoEmployeesWithSkillsBlock">
+                                                <div *ngFor="let bridge of s.Employee_Skill_Bridges">
+                                                    <br>
+                                                    <div>
+                                                        <table>
+                                                            <tr>
+                                                                <th><img [src]="bridge.employee.emp_ID_Image" [alt]="bridge.employee.emp_Name" width="10" class="small-image mr-3 ml-8"/> </th>
+                                                                <th>
+                                                                <span class="text-900 font-medium mr-2 mb-1 md:mb-0">{{bridge.employee.emp_Name}} {{bridge.employee.emp_Sur}}</span> 
+                                                                <span class="mt-1 font-medium text-600">is qualified at level </span>
+                                                                <span class="text-900 font-medium mr-2 mb-1 md:mb-0">{{bridge.level}}</span>
+                                                                </th>
+                                                            </tr>
+                                                        </table> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ng-template #elseNoEmployeesWithSkillsBlock>
+                                                <br>
+                                                <span class="mt-1 text-red-600 ml-8">No Employee selected has this skill!</span>
+                                            </ng-template>
+                                        </div>
+                                        <!--<div class="mt-2 md:mt-0 flex align-items-center">
+                                            <div class="surface-300 border-round overflow-hidden w-10rem lg:w-15rem" [ngStyle]="{height: '8px'}">
+                                                <div *ngIf="e.level == 1" class="bg-red-500 h-full" [ngStyle]="{width: '20%'}"></div>
+                                                <div *ngIf="e.level == 2" class="bg-yellow-500 h-full" [ngStyle]="{width: '40%'}"></div>
+                                                <div *ngIf="e.level == 3" class="bg-orange-500 h-full" [ngStyle]="{width: '60%'}"></div>
+                                                <div *ngIf="e.level == 4" class="bg-cyan-500 h-full" [ngStyle]="{width: '80%'}"></div>
+                                                <div *ngIf="e.level == 5" class="bg-green-500 h-full" [ngStyle]="{width: '100%'}"></div>
+                                            </div>
+    
+                                            <span class="text-black-500 ml-3 font-medium">Level {{ e.level }}</span>
+                                        </div>-->
+                                    </li>
+                                     <hr>
+                                </ul>
+    
+                            </div>
+                           
+                        </div>
+                        <ng-template #elseNoSkillsBlock> <label htmlFor="city"><h4>No skills assigned to this task.</h4></label></ng-template>
+
+                    </div>
+
+                    <!-- Employees-->
+                    <div class="field col-12 md:col-12">
+                        <hr>
+                        <h4>Employees:</h4>
+                        <div *ngIf="supervisor != undefined else NoSupervisor">
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Supervisor:</span> <span class="mt-1 text-600">{{supervisor.emp_Name}} {{supervisor.emp_Sur}}</span>
+                        </div>
+                        <ng-template #NoSupervisor>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Supervisor: </span><span class="mt-1 text-600">None</span>
+                        </ng-template>
+                        <div>
+                            <div class="mt-3" *ngIf="task.status.status_Name != 'COMPLETED' else ShowEmployeesWithReviews">
+                                <p-dataView #dv1 [value]="employees" [paginator]="false" [rows]="10" 
+                                layout="grid" filterBy="emp_Name">
+                                    <ng-template let-employee pTemplate="gridItem">    
+                                        <div class="review-item m-4 col-2">
+                                             <table>
+                                            <tr>
+                                                <th>
+                                                    <img [src]="employee.emp_ID_Image" [alt]="employee.emp_Name" width="50" class="table-image mr-3"/>
+                                                </th>
+                                                <!-- <th><p-avatar [image]="employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar></th> -->
+                                                <th> <span class="text-900 font-medium mr-2 mb-1 md:mb-0"> {{ employee.emp_Name }} {{ employee.emp_Sur }}</span></th>
+                                            </tr>
+                                        </table>  
+                                        </div>          
+                                       
+                                    </ng-template>
+                                </p-dataView>
+                            </div>
+                            <ng-template #ShowEmployeesWithReviews class="mt-3">
+                                <div *ngFor="let n of employeeCount">
+                                    <div  class="flex justify-content-between">
+                                        <div class="review-item m-4 col-8" style="cursor: pointer;"  [routerLink]="['../../../employees/employee/detail', employees[n].emp_ID]">
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        <img [src]="employees[n].emp_ID_Image" [alt]="employees[n].emp_Name" width="50" class="table-image mr-3"/>
+                                                    </th>
+                                                    <!-- <th><p-avatar [image]="employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar></th> -->
+                                                    <th> 
+                                                        <div class="text-900 font-medium mr-2 mb-1 md:mb-0 text-left"> {{ employees[n].emp_Name }} {{ employees[n].emp_Sur }}</div>
+                                                        <div class="text-600 font-medium mr-2 mb-1 md:mb-0 text-left" *ngIf="employees[n].emp_Rating >0 else unrated"> Rating for this task: {{ employees[n].emp_Rating }}/5</div>
+                                                        <ng-template #unrated ><div class="text-600 font-medium mr-2 mb-1 md:mb-0 text-left"> Rating for this task: No reviews are in just yet!</div></ng-template>
+                                                    </th>
+                                                </tr>
+                                            </table>  
+                                        </div>   
+                                        <div class="mt-6 mr-6">
+                                            <p-button class="p-button-secondary" (click)="updateSelectedReviews(n);op1.toggle($event)">
+                                                <i class="fa fa-eye mr-3" aria-hidden="true"></i>
+                                                View Ratings</p-button>
+                                        </div>  
+                                    </div>
+                                     <hr>    
+                                </div>
+
+                               
+                            </ng-template>
+                        </div>
+                       
+                        <hr>
+                    </div>
+                    <div class="field col-12"><span class="text-900 font-medium mr-2 mb-1 md:mb-0">Updates Posted: </span><span class="mt-1 text-600">{{updateCount}}</span></div>
+                    <div class="mr-2 mb-1 md:mb-0 ml-2">
+                        <button [routerLink]="['../../task-updates', taskID]" type="button" pButton pRipple
+                            class="p-button mr-2 col-6 md:col-2">
+                            <i class="fa fa-eye mr-3" aria-hidden="true"></i>
+                            View Updates
+                        </button>
+                    </div>
+                    <div class="field col-12">
+                        <hr>
+                        <!--Stock and Equipment-->
+                        <h4>Resources For Task</h4>
+                        <h5>Stock:</h5>
+                            <p-dataView #dv2 [value]="stock" [rows]="16" filterBy="stock_Name" layout="grid">
+                                <ng-template let-stockItem pTemplate="gridItem">
+                                    <div class="col-12 md:col-2">
+                                        <div class="card m-3 border-1 surface-border" style="height: 300px">
+                                            <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+                                                
+                                                <!-- <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
+                                            </div>
+                                            <div class="flex flex-column align-items-center text-center mb-3">
+                                                <img [src]="stockItem.stock_Image" [alt]="stockItem.stock_Name" [routerLink]="['../../../inventory/stock-detail', stockItem.stock_ID]" class="w-7 shadow-2 my-3 mx-0" style="height: 100px; cursor: pointer;"/>
+                                                <div class="text-base font-bold">{{stockItem.stock_Name}}</div>
+                                                <div class="mb-2">{{stockItem.stock_Description}}</div>
+                                                <!-- <div class="mt-3">{{product.stock_Description}}</div> -->
+                                                <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                                                <!-- <i class="pi pi-tag mr-2"></i> -->
+                                                    <span class="font-semibold">{{stockItem.task_Stock_Bridges[0].quantity_Needed}} requested</span>
+                                                    <span class="font-semibold">{{stockItem.task_Stock_Bridges[0].quantity_Used}} allocated to task</span>
+                                            </div>
+                                            <!-- <div class="flex align-items-center justify-content-between">
+                                                <span class="text-2xl font-semibold">${{stockItem.stock_Quantity}}</span>
+                                            </div> -->
+                                            <!-- <div class="text-center">
+                                                <p-button [routerLink]="['../../../inventory/stock-detail', stockItem.stock_ID]" class="p-button-rounded">
+                                                    <i class="fa fa-eye mr-3" aria-hidden="true"></i>
+                                                    View</p-button>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </ng-template>                
+                            </p-dataView>
+                            <hr>
+                        <h5>Equipment:</h5>
+                            <p-dataView #dv2 [value]="equipment" [rows]="16" filterBy="eqp_Name" layout="grid">
+                                <ng-template let-stockItem pTemplate="gridItem">
+                                    <div class="col-12 md:col-2">
+                                        <div class="card m-3 border-1 surface-border" style="height: 300px">
+                                            <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+                                                
+                                                <!-- <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
+                                            </div>
+                                            <div class="flex flex-column align-items-center text-center mb-3">
+                                                <img [src]="stockItem.eqp_Image" [routerLink]="['../../../inventory/equip-detail', stockItem.eqp_ID]" [alt]="stockItem.eqp_Name" class="w-7 shadow-2 my-3 mx-0" style="height: 100px; cursor: pointer;"/>
+                                                <div class="text-base font-bold">{{stockItem.eqp_Name}}</div>
+                                                <div class="mb-2">{{stockItem.eqp_Description}}</div>
+                                                <!-- <div class="mt-3">{{product.stock_Description}}</div> -->
+                                                <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                                                <!-- <i class="pi pi-tag mr-2"></i> -->
+                                                    <span class="font-semibold">{{stockItem.task_Equipment_Bridges[0].quantity_Needed}} requested</span>
+                                                    <span class="font-semibold">{{stockItem.task_Equipment_Bridges[0].quantity_Held}} allocated to task</span>
+                                            </div>
+                                            <!-- <div class="flex align-items-center justify-content-between">
+                                                <span class="text-2xl font-semibold">${{stockItem.stock_Quantity}}</span>
+                                            </div> -->
+                                        </div>
+                                        <!-- <div class="text-center">
+                                            <p-button [routerLink]="['../../../inventory/equip-detail', stockItem.eqp_ID]" class="p-button-secondary">
+                                                <i class="fa fa-eye mr-3" aria-hidden="true"></i>
+                                                View</p-button>
+                                        </div> -->
+                                    </div>
+                                </ng-template>                
+                            </p-dataView>
+                    </div>
+                    
+
+
+
+                    <!--Stats-->
+                    <div class="field col-12 md:col-12">
+                        <hr>
+                        <h4>Statistics:</h4>
+                        <div *ngIf="task.status.status_Name == 'COMPLETED' else ElseNotComplete">
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Completed On:</span><span class="mt-1 text-600">{{latestUpdateDay| date}}
+                                <span  *ngIf="compareDays(latestUpdateDay, myEndDate) >= 0 else taskAvgDateCompletedIsNegative"> 
+                                    <span class="mt-1 text-red-600">    (</span>
+                                    <span class="text-red-600 font-medium mr-2 mb-1 md:mb-0">{{compareDays(latestUpdateDay, myEndDate)}}</span>
+                                    <span class="mt-1 text-red-600">days after the deadline)</span>
+                                </span> 
+                                <ng-template #taskAvgDateCompletedIsNegative>
+                                    <span class="mt-1 text-green-600">  (</span>
+                                    <span class="text-green-600 font-medium mr-2 mb-1 md:mb-0">{{-compareDays(latestUpdateDay, myEndDate)}}</span> 
+                                    <span class="mt-1 text-green-600">days before the deadline)</span>
+                                </ng-template>   
+                            </span>
+
+                        </div>
+                        <ng-template #ElseNotComplete>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Last updated:</span><span class="mt-1 text-600">{{latestUpdateDay | date}}</span>
+                           
+
+                        </ng-template>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <p-overlayPanel #op1 [showCloseIcon]="true" [style]="{width: '450px'}">
+                <ng-template pTemplate>
+                    <p-table [value]="selectedEmployeeRatingsGiven" selectionMode="single" [paginator]="true"
+                        [rows]="2" responsiveLayout="scroll">
+                        <ng-template pTemplate="caption">
+                            Ratings
+                        </ng-template>
+                        <ng-template let-e pTemplate="body">              
+                            <div class="review-item m-4" style="cursor: pointer;" [routerLink]="['../../../employees/employee/review', e.rating_ID]">
+                                
+                                
+                                <div *ngIf="e.reviewer != null"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Reviewer:</span> {{  e.reviewer.emp_Name }} {{  e.reviewer.emp_Sur }}</p></div>                     
+                                <div>   
+                                    <br>                          
+                                    <!--<p-avatar [image]="up.employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar>-->
+                                    <div class="flex justify-content-between mr-2 mb-2" *ngIf="e.rating_Comment != ''">
+                                        <div><span class="text-900 font-medium mb-1 md:mb-0">Comment:</span> {{e.rating_Comment}}</div>
+                                        <div><p-tag  [value]="getRatingCategory(e.rating_Category)" [severity]="getRatingSeverity(e.rating_Category) "></p-tag></div>
+                                    </div>
+                                    <div *ngIf="e.rating_Comment == ''"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Comment:</span> N/A</p></div>         
+                                </div>
+                                <div class="mt-2 md:mt-0 flex align-items-center">
+                                    <div class="surface-300 border-round overflow-hidden w-10rem lg:w-15rem" [ngStyle]="{height: '8px'}">
+                                        <div *ngIf="e.rating_Rating == 1" class="bg-red-500 h-full" [ngStyle]="{width: '20%'}"></div>
+                                        <div *ngIf="e.rating_Rating == 2" class="bg-yellow-500 h-full" [ngStyle]="{width: '40%'}"></div>
+                                        <div *ngIf="e.rating_Rating == 3" class="bg-orange-500 h-full" [ngStyle]="{width: '60%'}"></div>
+                                        <div *ngIf="e.rating_Rating == 4" class="bg-cyan-500 h-full" [ngStyle]="{width: '80%'}"></div>
+                                        <div *ngIf="e.rating_Rating == 5" class="bg-green-500 h-full" [ngStyle]="{width: '100%'}"></div>
+                                    </div>
+
+                                    <span class="text-black-500 ml-3 font-medium">Rated {{ e.rating_Rating }}/5</span>
+                                    
+                                </div>
+                            </div>
+                            <hr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="8">No tasks found.</td>
+                                <!-- <div class="text-center">
+                                    <p-progressBar mode="indeterminate" [style]="{ height: 'px' }"></p-progressBar>
+                                </div> -->
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="loadingbody">
+                            <tr>
+                                <td colspan="8">Loading task data. Please wait.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </ng-template>
+            </p-overlayPanel>
+	</div>
+</div>
+

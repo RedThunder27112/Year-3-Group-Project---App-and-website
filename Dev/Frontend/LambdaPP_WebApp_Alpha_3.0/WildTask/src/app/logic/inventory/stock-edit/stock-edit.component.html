@@ -1,0 +1,84 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" *ngIf="isStock else EditEqp"  [routerLink]="['../../stock-detail', myStock.stock_ID]"  pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+   
+    <ng-template #EditEqp>
+        <button style="height:2.5rem" [routerLink]="['../../equip-detail', myEquip.eqp_ID]"  pButton pRipple type="button" class="p-button-raised p-button-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+            <div style="margin-left: 1rem;">Back</div> 
+        </button>
+    </ng-template>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<form [formGroup]="infoForm">
+
+    <div *ngIf="isStock else eqp">
+        <h3>Item Details</h3>
+        <div class="d-flex card p-fluid">
+            <div class="field mb-3 text-center">
+                <div>
+                    <p-image [src]="myImage" alt="Image" width="200"
+                        [preview]="true"></p-image>
+                </div>
+            </div>
+
+            <div class="field mb-3">
+                <label htmlFor="email1">Name</label>
+                <input pInputText id="email1" type="text" formControlName="name"/>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="email1">Description</label>
+                <textarea pInputText id="email1" type="text" rows="2" cols="2" formControlName="desc"></textarea>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="email1">Quantity</label>
+                <input pInputText id="email1" type="number" formControlName="quantity"/>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="leadTime">Lead Time</label>
+                <input pInputText id="leadTime" type="number" formControlName="lead_Time"/>
+            </div>
+        </div>
+    </div>
+    <ng-template #eqp>
+        <h3>Item Details</h3>
+        <div class="d-flex card p-fluid">
+            <div class="field mb-3 text-center">
+                <div>
+                    <p-image [src]="myImage" alt="Image" width="200"
+                        [preview]="true"></p-image>
+                </div>
+            </div>
+
+            <div class="field mb-3">
+                <label htmlFor="email1">Name</label>
+                <input pInputText id="email1" type="text" formControlName="name"/>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="email1">Description</label>
+                <textarea pInputText id="email1" type="text" rows="2" cols="2" formControlName="desc"></textarea>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="email1">Quantity</label>
+                <input pInputText id="email1" type="number" formControlName="quantity"/>
+            </div>
+        </div>
+    </ng-template>
+    <!-- <div class="mt-5 w-3 mx-auto p-fluid">
+        <p-toast></p-toast>
+        <button pButton pRipple type="button" label="Update Item"
+            class="p-button-rounded"></button>
+    </div> -->
+    <div class="text-center mt-5">
+        <p-toast></p-toast>
+        <button (click)="updateInventory()" pButton pRipple type="button" label="Update Inventory" class="p-button-rounded"></button>
+    </div>
+</form>
+

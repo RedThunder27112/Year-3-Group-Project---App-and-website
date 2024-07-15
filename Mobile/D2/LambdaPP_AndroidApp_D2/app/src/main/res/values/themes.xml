@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.LambdaPP_AndroidApp_D2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/PaleBlue</item>
+        <item name="colorPrimaryVariant">@color/DarkerPaleBlue</item>
+        <item name="colorOnPrimary">@color/DarkestPaleBlue</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/PastelRed</item>
+        <item name="colorSecondaryVariant">@color/DarkerPaleBlue</item>
+        <item name="colorOnSecondary">@color/DarkestPaleBlue</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.LambdaPP_AndroidApp_D2.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.LambdaPP_AndroidApp_D2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.LambdaPP_AndroidApp_D2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CalendarView_Default">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="CalendarView_SelectedRange">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@color/PastelRed</item>
+    </style>
+</resources>

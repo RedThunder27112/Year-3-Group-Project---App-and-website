@@ -1,0 +1,102 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" (click)="goBack()" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="grid">
+    <div class="col-12" *ngIf="skill != undefined">
+        <h3> Skill Information: {{ skill.skill_Name }} </h3>
+        <div class="card">
+            <div>
+                <div class="flex justify-content-between mr-5">
+                    <div>
+                        <h4>Skill Description:</h4>
+                        <span style="font-size: medium;">{{ skill.skill_Description }}</span> 
+                        <!-- <h4>Rating: {{ employee.emp_Rating }} <i class="pi pi-star-fill" style="color: rgb(233, 209, 27); width: 100px"></i> </h4> -->
+                    </div>
+                </div>
+                
+                <br>
+                <h4>Skilled Employees: </h4>
+                <p-table #dt1 dataKey="emp_ID" [value]="employees" [paginator]="true" [rows]="5" selectionMode="single"
+                    responsiveLayout="stack" [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Employees" [rowsPerPageOptions]="[5, 10, 20]"
+                    [globalFilterFields]="['emp_Name', 'emp_Sur']">
+                    <ng-template pTemplate="caption">
+                        <!-- <div class="flex justify-content-between">
+                            <div></div>
+                            <div></div>
+                            <div class="d-flex mr-3">
+                                <p-columnFilter field="emp_Role" matchMode="equals" [showMenu]="false" [showClearButton]="false">
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-dropdown [options]="roles" (onChange)="filter($event.value)" [filter]="false"
+                                            placeholder="Role" [showClear]="true">
+                                            <ng-template let-option pTemplate="item">
+                                                <span>{{ option }}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </div>
+                        </div> -->
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="20%">Image</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Rating</th>
+                            <th width="20%">Skill Level</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-e let-rowIndex="rowIndex">
+                        <tr [pSelectableRow]="e" [routerLink]="['../employee-detail', e.emp_ID]">
+                            <td>
+                                <img [src]="e.emp_ID_Image" [alt]="e.emp_Name" width="100" class="table-image" />
+                            </td>
+                            <td style="font-size: medium;">{{ e.employee.emp_Name }} {{ e.employee.emp_Sur }}</td>
+                            <td style="font-size: medium;">{{ e.employee.emp_Rating }} <i class="pi pi-star-fill"
+                                    style="color: rgb(233, 209, 27)"></i>
+                            </td>
+                            <td>
+                                <div class="flex align-items-center">
+                                    <div class="surface-300 border-round overflow-hidden w-10rem lg:w-15rem" [ngStyle]="{height: '8px'}">
+                                        <div *ngIf="e.skill_Level == 1" class="bg-red-500 h-full" [ngStyle]="{width: '20%'}"></div>
+                                        <div *ngIf="e.skill_Level == 2" class="bg-yellow-500 h-full" [ngStyle]="{width: '40%'}"></div>
+                                        <div *ngIf="e.skill_Level == 3" class="bg-orange-500 h-full" [ngStyle]="{width: '60%'}"></div>
+                                        <div *ngIf="e.skill_Level == 4" class="bg-cyan-500 h-full" [ngStyle]="{width: '80%'}"></div>
+                                        <div *ngIf="e.skill_Level == 5" class="bg-green-500 h-full" [ngStyle]="{width: '100%'}"></div>
+                                    </div>
+
+                                    <span class="text-black-500 ml-3 font-medium">Level {{ e.skill_Level }}</span>
+                                </div>
+                            </td>
+                            <!-- <td> <p-rating [ngModel]="e.emp_Rating" [readonly]="true" [cancel]="false"></p-rating></td> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="loadingbody">
+                        <tr>
+                            <td colspan="8">Loading employee data. Please wait.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">No employees found.</td>
+                            <!-- <div class="text-center">
+                                    <p-progressBar mode="indeterminate" [style]="{ height: 'px' }"></p-progressBar>
+                                </div> -->
+                        </tr>
+                    </ng-template>
+                </p-table>
+    
+            </div>
+        </div>
+    </div>
+</div>

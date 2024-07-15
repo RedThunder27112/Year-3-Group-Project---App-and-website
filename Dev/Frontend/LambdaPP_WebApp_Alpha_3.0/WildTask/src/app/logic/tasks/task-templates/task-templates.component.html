@@ -1,0 +1,61 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" (click)="goBack()" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="flex justify-content-between mb-3 align-items-center">
+                <div class="p-input-icon-right">
+                    <input pInputText type="text" (input)="onFilter(dv1, $event)" placeholder="Search" />
+                    <i class="pi pi-search"></i>
+                </div>
+
+                <h3 *ngIf="!isEdit" style="margin-left: 8rem;">Task Templates</h3>
+                <h3 *ngIf="isEdit" style="margin-right: 19rem;">Edit Templates</h3>
+
+                <div>
+                    <button *ngIf="!isEdit" [routerLink]="['../create-task']" pButton pRipple type="button" style="height: 2.5rem;"
+                        class="p-button">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <div style="margin-left: 1rem;">Add New Task Template</div>
+                    </button>
+                    <button *ngIf="!isEdit" [routerLink]="['./edit']" pButton pRipple type="button" style="height: 2.5rem;"
+                        class="p-button ml-2">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        <div style="margin-left: 1rem;">Edit Templates</div>
+                    </button>
+                </div>
+                
+            </div>
+
+            <p-dataView #dv1 [value]="taskTemplates" [paginator]="true" [rows]="12" filterBy="task_Name" [sortField]="sortField"
+                [sortOrder]="sortOrder" layout="grid">
+                <ng-template let-t pTemplate="gridItem">
+                    <div class="col-12 lg:col-4 xl:col-4" style="cursor: pointer;"
+                        (click)="redirectToPage(t.template_ID)">
+                        <div class="card m-2 border-1" style="height: 200px">
+                            <div class="flex justify-content-between mb-3">
+                                <div>
+                                    <span class="block text-500 font-medium mb-3">{{ t.task_Name }}</span>
+                                    <div class="text-900 font-medium mb-2">{{ t.task_Description }}</div>
+                                    <div class="text-900 font-small">Length: {{ t.task_Length_Days }} days long</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div>
+</div>

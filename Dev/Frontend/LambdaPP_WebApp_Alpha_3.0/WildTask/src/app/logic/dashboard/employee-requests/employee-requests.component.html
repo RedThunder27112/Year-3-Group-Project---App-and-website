@@ -1,0 +1,102 @@
+<!-- <div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../dashboard']" pButton pRipple type="button" class="p-button p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+</div> -->
+
+<h3> Requests </h3>
+<p-accordion [multiple]="true" [activeIndex]="[0, 1]">
+    <p-accordionTab header="Inventory Requests" [selected]="true" class="line-height-3 m-0">
+        <section class="timeline-section">
+            <div class="mb-8" *ngIf="employeeRequests != undefined">
+                <ng-container *ngFor="let er of employeeRequests">
+                    <div class="timeline-item">
+                        <h5>{{ er.req_Description }}</h5>
+                        <div class="flex justify-content-between mr-5">
+                            <div>
+                                <p class="">Posted by {{ er.employee?.emp_Name }} {{ er.employee?.emp_Sur }}</p>
+                                <p-avatar [image]="er.employee?.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar>
+                            </div>
+        
+                            <div class="flex">
+                                <div class="mr-3">
+                                    <button (click)="accept(er)"  pButton class="p-button-success">
+                                        <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                                        <p-toast></p-toast>
+                                        Accept
+                                    </button>
+                                </div>
+                                <div class="mr-3">
+                                    <button (click)="decline(er)" pButton class="p-button-danger">
+                                        <i class="fa fa-trash mr-2" aria-hidden="true"></i>
+                                        <p-toast></p-toast>
+                                        Deny
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template [ngIf]="this.employeeRequests != undefined">
+                    <ng-template [ngIf]="this.employeeRequests.length == 0">
+                        <div class="text-center">
+                            <img class="w-2 h-2 mb-5" src="assets/pic.png" alt="">
+                            <h4 class="d-flex justify-content-center">No new inventory requests</h4>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </section>
+    </p-accordionTab>
+
+    <p-accordionTab header="Skill Requests" class="line-height-3 m-0">
+        <section class="timeline-section">
+            <div class="mb-8" *ngIf="skillsRequests != undefined">
+                <ng-container *ngFor="let sr of skillsRequests">
+                    <div class="timeline-item">
+                        <h5>Skill Request For "{{ sr.skill?.skill_Name }}" at Level {{ sr.req_Skill_Level }}</h5>
+                        <div class="flex justify-content-between mr-5">
+                            <div>
+                                <p class="">Posted by {{ sr.employee?.emp_Name }} {{ sr.employee?.emp_Sur }}</p>
+                                <p-avatar [image]="sr.employee?.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar>
+                            </div>
+        
+                            <div class="flex">
+                                <div class="mr-3">
+                                    <button  pButton class="p-button-info">
+                                        <i class="fa fa-eye mr-2" aria-hidden="true"></i>
+                                        <p-toast></p-toast>
+                                        View Supporting Document
+                                    </button>
+                                </div>
+                                <div class="mr-3">
+                                    <button (click)="resolveSkillRequest(sr, 1)"  pButton class="p-button-success">
+                                        <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                                        <p-toast></p-toast>
+                                        Accept
+                                    </button>
+                                </div>
+                                <div class="mr-3">
+                                    <button (click)="resolveSkillRequest(sr, 2)" pButton class="p-button-danger">
+                                        <i class="fa fa-trash mr-2" aria-hidden="true"></i>
+                                        <p-toast></p-toast>
+                                        Deny
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template [ngIf]="this.skillsRequests != undefined">
+                    <ng-template [ngIf]="this.skillsRequests.length == 0">
+                        <div class="text-center">
+                            <img class="w-2 h-2 mb-5" src="assets/pic.png" alt="">
+                            <h4 class="d-flex justify-content-center">No new skill requests</h4>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </section>    
+    </p-accordionTab>
+</p-accordion>

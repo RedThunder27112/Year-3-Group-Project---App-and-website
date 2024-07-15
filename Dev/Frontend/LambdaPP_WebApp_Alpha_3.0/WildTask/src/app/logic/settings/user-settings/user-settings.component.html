@@ -1,0 +1,63 @@
+<h3>User Settings</h3>
+
+<p-accordion [multiple]="true" [activeIndex]="[0, 1]">
+    <p-accordionTab header="Appearence" [selected]="true" class="line-height-3 m-0">
+        <div class="card">
+            <div class="justify-content-between">
+                <div>
+                <h5>Scale</h5>
+                </div>
+                <div class="flex align-items-center">
+                    <button icon="pi pi-minus" type="button" pButton (click)="decrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem mr-2" [disabled]="scale === scales[0]"></button>
+                    <div class="flex gap-2 align-items-center">
+                        <i class="pi pi-circle-fill text-300" *ngFor="let s of scales" [ngClass]="{'text-primary-500': s === scale}"></i>
+                    </div>
+                    <button icon="pi pi-plus"  type="button" pButton (click)="incrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem ml-2" [disabled]="scale === scales[scales.length - 1]"></button>
+                </div>
+            </div>
+        </div>
+    
+        <ng-container>
+            <div class="card">
+                <h5>Theme</h5>
+                <div class="d-flex">
+                <div class="field-radiobutton flex-1">
+                    <p-radioButton name="inputStyle" value="outlined" (click)="changeTheme('epi-use-custom', 'light')" [(ngModel)]="inputStyle" inputId="outlined_input"></p-radioButton>
+                    <label for="outlined_input">EPI-USE Light</label>
+                </div>
+                <div class="field-radiobutton flex-1">
+                    <p-radioButton name="inputStyle" value="filled" (click)="changeTheme('bootstrap4-dark-purple', 'dark')" [(ngModel)]="inputStyle" inputId="filled_input"></p-radioButton>
+                    <label for="filled_input">EPI-USE Dark</label>
+                </div>
+            </div>
+        </div>
+        </ng-container>
+        <div class="card">
+            <h5>Ripple Effect</h5>
+            <p-inputSwitch [(ngModel)]="ripple"></p-inputSwitch>
+        </div>
+    </p-accordionTab>
+    <p-accordionTab header="System" class="line-height-3 m-0">
+        <div class="card">
+            <h5>Change Password</h5>
+            <form>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="firstname2">New Password</label>
+                        <p-password [(ngModel)]="password" name="password" type="password" autocomplete="off" />
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="lastname2">Confirm Password</label>
+                        <p-password [(ngModel)]="confirmPassword" [feedback]="false" name="confirmPassword" type="password" autocomplete="off"/>
+                        <small *ngIf="password != confirmPassword && confirmPassword != null" class="p-error">Passwords currently
+                            don't match</small>
+                    </div>
+                </div>
+                <button pButton class="p-button" (click)="changePassword()">
+                    <p-toast></p-toast>
+                    Change Password
+                </button>
+            </form>
+        </div>
+    </p-accordionTab>
+</p-accordion>

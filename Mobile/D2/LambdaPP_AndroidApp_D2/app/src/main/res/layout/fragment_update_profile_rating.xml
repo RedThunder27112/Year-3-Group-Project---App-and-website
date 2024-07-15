@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.updateUserDetails.UpdateProfileRatingFragment">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/scrlStuff"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="10">
+
+            <LinearLayout
+                android:id="@+id/scrllayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/lblSkills"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/maven_pro_medium"
+                        android:text="@string/skills"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/SkillLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lblSkills">
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/lblAllSkills"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/maven_pro_medium"
+                        android:text="@string/allskills"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintTop_toBottomOf="@+id/SkillLayout"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerListSkills"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/lblAllSkills"/>
+
+                    <TextView
+                        android:id="@+id/lblSkillLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/maven_pro_medium"
+                        android:text="@string/skillLevel"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintTop_toBottomOf="@+id/spinnerListSkills"/>
+
+                    <RadioGroup
+                        android:id="@+id/levelGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lblSkillLevel">
+
+                        <RadioButton
+                            android:id="@+id/radioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:text="@string/_1" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:text="@string/_2" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:text="@string/_3" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:text="@string/_4" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_5" />
+
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/btnUploadDoc"
+                        style="@style/Widget.Material3.Button.IconButton.Filled"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/maven_pro_medium"
+                        android:text="@string/upload_document"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/levelGroup" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnPostUpdateDoc"
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@color/PastelRed"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="@string/update_details"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

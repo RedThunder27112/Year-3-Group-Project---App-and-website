@@ -1,0 +1,88 @@
+<mat-toolbar color="primary">
+    <button *ngIf="!sidenav.opened" mat-icon-button class="example-icon"(click)="sidenav.toggle();">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button *ngIf="sidenav.opened" mat-icon-button class="example-icon" (click)="sidenav.toggle();">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <img src="assets/logo.png" width="50px" height="45px">
+
+    <h1 style="margin-left: 10px;">WildTask</h1>
+  
+    <span class="example-spacer"></span>
+
+    <div class="propic" [routerLink]="['profile', empID]">
+      <mat-label *ngIf="employee != undefined" color="accent">
+        {{employee.emp_Name}} {{employee.emp_Sur}}
+      </mat-label>
+  
+      <img [src]="employee.emp_ID_Image" class="rounded-circle" style="width: 50px; height: 50px; margin-left: 15px;">
+    </div> 
+    
+  
+  </mat-toolbar>
+  
+  <mat-drawer-container autosize [hasBackdrop]="false">
+  
+    <mat-drawer mode="over" opened="false" #sidenav>
+      <mat-nav-list>
+  
+      <mat-list-item [routerLink]="['dashboard']" routerLinkActive="activebutton">
+        <button mat-button><i matListItemIcon class="fa fa-area-chart" aria-hidden="true"></i> Dashboard</button>
+        </mat-list-item>
+  
+        <mat-list-item [routerLink]="['tasks']" routerLinkActive="activebutton"> 
+          <button mat-button><mat-icon matListItemIcon>content_paste</mat-icon> Task Management</button>
+        </mat-list-item>
+  
+        <mat-list-item [routerLink]="['employees']" routerLinkActive="activebutton">
+          <button mat-button><i matListItemIcon class="fa fa-users" aria-hidden="true" disabled="true"></i> Employee Management</button>
+        </mat-list-item>        
+
+        <mat-expansion-panel [class.mat-elevation-z0]="true">
+            <mat-expansion-panel-header>
+              <button mat-button style="padding: 0%;">
+                <i matListItemIcon class="fa fa-cubes" aria-hidden="true"></i>
+                Resource Management
+              </button>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+            <mat-list-item routerLink="warehouse/stock-management" routerLinkActive="activebutton">
+              <button mat-button><i matListItemIcon class="fa fa-cube" aria-hidden="true"></i> Stock Management</button>
+            </mat-list-item>
+
+            <mat-list-item routerLink="warehouse/equip-management" routerLinkActive="activebutton">
+              <button mat-button><i matListItemIcon class="fa fa-wrench"></i> Equipment Management</button>
+            </mat-list-item>
+          </mat-nav-list>
+      </mat-expansion-panel>
+
+        <mat-list-item [routerLink]="['profile']" routerLinkActive="activebutton">
+          <button mat-button><i matListItemIcon class="fa fa-user" aria-hidden="true"></i> Profile</button>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+  
+        <mat-list-item (click)="clearSession()" [routerLink]="['/login']" class="custom-button">
+          <button mat-button><i matListItemIcon class="fa fa-sign-out" aria-hidden="false"></i> Sign Out</button>
+        </mat-list-item>
+  
+      </mat-nav-list>
+    </mat-drawer>
+      
+    <mat-drawer-content>
+      <!-- change height to 92px for 1920 x 1080 -->
+      <!-- height: 80vh for other -->
+      <!-- THIS THING CONTROLS WHERE COMPONENTS ARE RENDERED!!! -->
+      <section class="container mt-4" style="text-align: center; height: 84vh;">
+       <router-outlet></router-outlet>
+      </section>
+      
+    </mat-drawer-content>
+  
+  </mat-drawer-container>
+  
+  <!-- <lib-ng-toast></lib-ng-toast>
+        <ng-confirm></ng-confirm> -->
+  

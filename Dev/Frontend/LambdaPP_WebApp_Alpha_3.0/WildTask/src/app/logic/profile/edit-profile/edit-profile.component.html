@@ -1,0 +1,83 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../profile']" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+<div class="grid">
+    <div class="col-12">
+        <h3> Edit Profile </h3>
+        <form [formGroup]="updateProfileForm">
+            <div class="card">
+                <div *ngIf="employee != undefined">
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field col-12 md:col-6">
+                            <label htmlFor="empName">Name</label>
+                            <input formControlName="empName" pInputText id="empName" type="text"/>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <label htmlFor="surName">Surname</label>
+                            <input formControlName="surName" pInputText id="surName" type="text"/>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <label htmlFor="empEmail">Email</label>
+                            <input formControlName="empEmail" pInputText id="empEmail" type="text"/>
+                        </div>
+                        <br>
+                    </div>
+                    <div>
+                        <label htmlFor="city">Skills</label>
+
+                        <p-table
+                        #dt1 
+                        [value]="skills" 
+                        [metaKeySelection]="false" 
+                        [rows]="5" 
+                        [showCurrentPageReport]="true"
+                        [paginator]="false" 
+                        [rowsPerPageOptions]="[5, 10, 20, 50]" 
+                        [paginator]="true" 
+                        dataKey="skill_ID"
+                        styleClass="p-datatable-striped"
+                        [tableStyle]="{ 'min-width': '40rem' }"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} skills"
+                        [globalFilterFields]="['skill.skill_Name', 'skill.skill_Description','level']">
+                        <ng-template pTemplate="caption">
+                            <div class="flex justify-content-between">
+                                <div class="d-flex">
+                                    <div class="p-input-icon-right">
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="Search"/>
+                                        <i class="pi pi-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Skill Level</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-e let-rowIndex="rowIndex">
+                                <tr [pSelectableRow]="e" [pSelectableRowIndex]="rowIndex">
+                                    <td>{{ e.skill.skill_Name }}</td>
+                                    <td>{{ e.skill.skill_Description }}</td>
+                                    <td> <input pInputText id="inskillLevel" type="number" value="{{e.level}}" #inlevel (keyup)="updateSkill(e, inlevel.value)"  
+                                        (click)="updateSkill(e, inlevel.value)"/></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            <div class="field mt-5 w-3 mx-auto p-fluid">
+                <p-toast></p-toast>
+                <button (click)="updateProfile()" pButton pRipple type="button" label="Update Profile" class="p-button-rounded"></button>
+            </div>
+        </form>
+    </div>
+</div>

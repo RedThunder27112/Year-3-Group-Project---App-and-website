@@ -1,0 +1,135 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../../inventory']" pButton pRipple type="button" class="p-button p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+
+    <button *ngIf="isStock else EditEqp" style="height:2.5rem"  [routerLink]="['../../stock-edit', myStock.stock_ID]" pButton pRipple type="button" class="p-button">
+        <i class="fa fa-pencil" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Edit</div> 
+    </button>
+    <ng-template #EditEqp>
+        <button style="height:2.5rem"  [routerLink]="['../../equip-edit', myEquip.eqp_ID]" pButton pRipple type="button" class="p-button">
+            <i class="fa fa-pencil" aria-hidden="true"></i> 
+            <div style="margin-left: 1rem;">Edit</div> 
+        </button>
+    </ng-template>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<form [formGroup]="infoForm">
+
+    <h3>Item Details</h3>
+    <div *ngIf="isStock else eqp">
+        <div class="d-flex card p-fluid">
+            <div class="field mb-3 text-center">
+                <div>
+                    <p-image [src]="myImage" alt="Image" width="200"
+                        [preview]="true"></p-image>
+                </div>
+            </div>
+    
+            
+            <div class="field mb-3">
+                <label htmlFor="name" class="text-900 font-medium mr-2 mb-1 md:mb-0">Name</label>
+                <div class="mt-1 text-600" id="name" >{{myStock.stock_Name}}</div>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="desc" class="text-900 font-medium mr-2 mb-1 md:mb-0">Description</label>
+                <div class="mt-1 text-600" id="desc" >{{myStock.stock_Description}}</div>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="quantity" class="text-900 font-medium mr-2 mb-1 md:mb-0">Quantity</label>
+                <div class="mt-1 text-600" id="quantity" >{{myStock.stock_Quantity}} Units</div>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="quantity" class="text-900 font-medium mr-2 mb-1 md:mb-0" >Quantity Available (excludes stock pending approval for use)</label>
+                <div class="mt-1 text-600" id="quantity" >{{stockAmountAvailable}} Units</div>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="quantity" class="text-900 font-medium mr-2 mb-1 md:mb-0">Lead Time</label>
+                <div class="mt-1 text-600" id="quantity" >{{myStock.stock_Lead_Time}} days</div>
+                <div *ngIf="myStock.Low_Stock != undefined">
+                    <br>
+                    <div *ngIf="myStock.Low_Stock.month">
+                        <div *ngIf="myStock.Low_Stock.bi_Week else PurchaseInMonth">
+                            <div *ngIf="myStock.Low_Stock.week else PurchaseIn2Week">
+                                <span class="text-red-500 font-medium">Purchase {{ceil( myStock.Low_Stock.usage_Weekly * 1.1)}}  units this week!</span>
+                            </div>
+                            <ng-template #PurchaseIn2Week>
+                                <span class="text-yellow-500 font-medium">Purchase {{ceil( myStock.Low_Stock.usage_Bi_Weekly * 1.1)}} units within 2 weeks!</span>
+                            </ng-template>
+                        </div>
+                        <ng-template #PurchaseInMonth>
+                            <span class="text-green-500 font-medium">Purchase {{ceil( myStock.Low_Stock.usage_Monthly * 1.1)}} units this month!</span>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="field col-12">
+                <label htmlFor="Usage" class="text-900 font-medium mr-2 mb-1 md:mb-0">Usage</label>
+                <div *ngIf="myStock.Low_Stock != undefined">
+                    <div class="mt-1 text-600" id="quantity" >Weekly: {{myStock.Low_Stock.usage_Weekly}} units</div>
+                    <div class="mt-1 text-600" id="quantity" >Biweekly: {{myStock.Low_Stock.usage_Bi_Weekly}} units</div>
+                    <div class="mt-1 text-600" id="quantity" >Monthly: {{myStock.Low_Stock.usage_Monthly}} units</div>
+                </div>               
+                <!--<div class="mt-3">
+                    <ul class="list-none p-0 m-0" >
+                        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4" *ngFor="let i of monthCount">
+                            <div class="col-12 md:col-2">{{months[i]}}: {{stockUsedPerMonth[i]}}</div>
+                        </li>
+
+                    </ul>
+                </div>-->
+                <div class="mt-1 text-600" id="quantity" >This year:</div>
+                
+                <div class="col-12 lg:col-6 xl:col-6">
+                    <div>
+                        <p-chart type="line" [data]="stockBarData" [options]="stockBarOptions"></p-chart>
+                    </div>
+                </div>
+                <!--<p-dataView #dv1 [value]="monthCount" [paginator]="false" [rows]="12" layout="grid">
+                    <ng-template let-i pTemplate="gridItem">    
+                        <div class="review-item m-4 col-1">
+                            <div class="mt-1 text-600">{{months[i-1]}}: {{stockUsedPerMonth[i-1]}}</div>
+                        </div>          
+                    </ng-template>
+                </p-dataView>-->
+            </div>
+        </div>
+    </div>
+    <ng-template #eqp>
+        <div class="d-flex card p-fluid">
+            <div class="field mb-3 text-center">
+                <div>
+                    <p-image [src]="myImage" alt="Image" width="200"
+                        [preview]="true"></p-image>
+                </div>
+            </div>
+    
+            
+            <div class="field mb-3">
+                <label htmlFor="name" class="text-900 font-medium mr-2 mb-1 md:mb-0">Name</label>
+                <div class="mt-1 text-600" id="name" >{{myEquip.eqp_Name}}</div>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="desc" class="text-900 font-medium mr-2 mb-1 md:mb-0">Description</label>
+                <div class="mt-1 text-600" id="desc" >{{myEquip.eqp_Description}}</div>
+            </div>
+            <div class="field mb-3">
+                <label htmlFor="quantity" class="text-900 font-medium mr-2 mb-1 md:mb-0">Quantity</label>
+                <div class="mt-1 text-600" id="quantity" >{{myEquip.eqp_Quantity_Total}} items</div>
+            </div>
+        </div>
+    </ng-template>
+    
+    <!-- <div class="mt-5 w-3 mx-auto p-fluid">
+        <p-toast></p-toast>
+        <button pButton pRipple type="button" label="Update Item"
+            class="p-button-rounded"></button>
+    </div> -->
+</form>
+

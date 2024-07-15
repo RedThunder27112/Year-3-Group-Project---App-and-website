@@ -1,0 +1,315 @@
+<div class="d-flex justify-content-between mb-3">
+  <button
+    (click)="goBack()"
+    mat-raised-button
+    color="accent"
+    style="align-self: flex-start"
+  >
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Back
+  </button>
+
+  <!-- <button (click)="employeeRecs()" [disabled]="!this.createTaskForm.value?.skills" mat-raised-button color="accent" style="align-self: flex-start;">
+        <mat-icon>person</mat-icon>  
+        View Employee Recommendations
+    </button> -->
+</div>
+
+<h2 style="text-align: center">Create New Task</h2>
+
+<div>
+  <form
+    [formGroup]="createTaskForm"
+    #formDirective="ngForm"
+    (ngSubmit)="createTask(formDirective)"
+  >
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+          <mat-label>Activity</mat-label>
+          <mat-select formControlName="activity">
+            <mat-option *ngFor="let act of activities" [value]="act">
+              {{ act.act_Name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            style="color: red"
+            *ngIf="
+              (createTaskForm.controls['activity'].touched ||
+                createTaskForm.controls['activity'].dirty) &&
+              createTaskForm.hasError('required', 'activity')
+            "
+            >activity is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-2">
+        <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+          <mat-label>Task Name</mat-label>
+          <input formControlName="taskname" matInput />
+          <mat-error
+            style="color: red"
+            *ngIf="
+              (createTaskForm.controls['taskname'].touched ||
+                createTaskForm.controls['taskname'].dirty) &&
+              createTaskForm.hasError('required', 'taskname')
+            "
+            >task name is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea formControlName="taskdesc" matInput></textarea>
+          <mat-error
+            style="color: red"
+            *ngIf="
+              (createTaskForm.controls['taskdesc'].touched ||
+                createTaskForm.controls['taskdesc'].dirty) &&
+              createTaskForm.hasError('required', 'taskdesc')
+            "
+            >task description is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field [hideRequiredMarker]="true">
+          <mat-label>Start Date</mat-label>
+          <input
+            formControlName="startdate"
+            matInput
+            [min]="todayDate"
+            [matDatepicker]="pickerStart"
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerStart"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            (click)="addValidator('deadline')"
+            #pickerStart
+          ></mat-datepicker>
+          <mat-error
+            style="color: red"
+            *ngIf="
+              (createTaskForm.controls['startdate'].touched ||
+                createTaskForm.controls['startdate'].dirty) &&
+              createTaskForm.hasError('required', 'startdate')
+            "
+            >start date is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-3">
+        <mat-form-field [hideRequiredMarker]="true">
+          <mat-label>Deadline</mat-label>
+          <input
+            formControlName="deadline"
+            matInput
+            [min]="startDate"
+            [matDatepicker]="pickerEnd"
+            [readonly]="!this.createTaskForm.value?.startdate"
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerEnd"
+            [disabled]="!this.createTaskForm.value?.startdate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error
+            style="color: red"
+            *ngIf="
+              (createTaskForm.controls['startdate'].touched ||
+                createTaskForm.controls['deadline'].dirty) &&
+              createTaskForm.hasError('required', 'deadline')
+            "
+            >deadline date is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12 mt-2 mb-2">
+        <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+          <mat-label>Skill(s)</mat-label>
+          <mat-select formControlName="skills" multiple>
+            <mat-option *ngFor="let element of skills" [value]="element">{{
+              element.skill_Name
+            }}</mat-option>
+          </mat-select>
+          <mat-error
+            style="color: red"
+            *ngIf="
+              (createTaskForm.controls['skills'].touched ||
+                createTaskForm.controls['skills'].dirty) &&
+              createTaskForm.hasError('required', 'skills')
+            "
+          >
+            at least one skill is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="col-md-6">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>Employee(s)</mat-label>
+                    <mat-select formControlName="employees" multiple>
+                        <mat-option *ngFor="let element of employees" [value]="element">{{element.emp_Name}} {{element.emp_Sur}}</mat-option>
+                    </mat-select>
+                    <mat-error style="color: red;" *ngIf="(createTaskForm.controls['employees'].touched || createTaskForm.controls['employees'].dirty) && createTaskForm.hasError('required', 'employees')"> at least one employee is required</mat-error>
+                </mat-form-field>
+            </div> -->
+
+      <!-- <div class="card">
+        <p-table
+        #dt1
+          [value]="employees"
+          selectionMode="multiple"
+          [(selection)]="selected_employees"
+          [metaKeySelection]="false"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [paginator]="true"
+          (onRowSelect)="onRowSelect($event)" 
+          (onRowUnselect)="onRowUnselect($event)"
+          dataKey="emp_ID"
+          styleClass="p-datatable-striped"
+          [tableStyle]="{ 'min-width': '40rem' }"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [globalFilterFields]="['emp_Name', 'emp_Sur']"
+        >
+          <ng-template pTemplate="caption"> Employees 
+            <div class="flex">
+                <input style="margin-top: 10px" pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="e.g John" />
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-e let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="e" [pSelectableRowIndex]="rowIndex">
+                <td>
+                    <p-tableCheckbox [value]="e"></p-tableCheckbox>
+                </td>
+              <td>
+                <img
+                  [src]="e.emp_ID_Image"
+                  [alt]="e.emp_Name"
+                  width="100"
+                  class="table-image"
+                />
+              </td>
+              <td>{{ e.emp_Name }} {{ e.emp_Sur }}</td>
+              <td>{{ e.emp_Role }}</td>
+            </tr>
+          </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" styleClass="p-button-text"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" styleClass="p-button-text"></p-button>
+            </ng-template>
+        </p-table>
+        <small style="color: red" *ngIf="none_selected"
+          >at least one employee is required</small
+        >
+      </div> -->
+
+      <div class="mat-elevation-z8 card">
+        <div class="d-flex justify-content-between mt-3">
+          <div class="col-md-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Search</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="e.g. John"
+              #input
+              />
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <h4 class="mx-auto">Employees</h4>
+          
+          <div class="col-md-3 text-end">
+            <mat-form-field appearence="fill">
+              <mat-label>Role</mat-label>
+              <mat-select (selectionChange)="onFilter($event)">
+                <mat-option (click)="reset()">None</mat-option>
+                <mat-option value="Employee">General Employee</mat-option>
+                <mat-option value="Contractor">Contractor</mat-option>
+                <mat-option value="Administrator">Administrator</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="selectionHandler(row)"
+                        [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+          
+          <ng-container matColumnDef="Image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element">
+              <img [src]="element.emp_ID_Image" alt="Image" class="table-image">
+            </td>
+          </ng-container>
+    
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.emp_Name}} {{element.emp_Sur}} </td>
+          </ng-container>
+      
+          <!-- Role Column -->
+          <ng-container matColumnDef="IsAdmin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+            <td mat-cell *matCellDef="let element"> {{element.emp_Role}} </td>
+          </ng-container>
+
+          <!-- Recommended Column -->
+          <ng-container matColumnDef="Recommended">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngFor="let reco of recommended_employees.slice(0, 3)">
+                <ng-container *ngIf="reco.emp_ID == element.emp_ID">
+                  <i style="color: green;">recommended</i>
+                </ng-container>
+              </ng-container>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of employees">
+        </mat-paginator>
+
+        <small style="color: red;" *ngIf="none_selected">at least one employee is required</small>
+      </div>
+    </div>
+    <button class="mt-4 custom-button" mat-raised-button color="accent">Create</button>
+  </form>
+</div>

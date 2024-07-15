@@ -1,0 +1,33 @@
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.custom-button {
+    width: 300px; /* Adjust the desired button width */
+    height: 40px; /* Adjust the desired button height */
+    font-size: 16px; /* Adjust the desired font size */
+    line-height: 10px; /* Adjust the desired line height */
+    margin-top: 40px;
+}
+
+.button-space {
+    margin-left: 10px; /* Adjust the desired space between buttons */
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: rgb(61, 57, 254);
+    border-bottom: 2px solid rgb(112, 109, 252);
+    border-top: 2px solid rgb(112, 109, 252);
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    cursor: pointer;
+}
+
+
+
+// th {
+//     background-color: rgb(138, 220, 255) !important;
+// }

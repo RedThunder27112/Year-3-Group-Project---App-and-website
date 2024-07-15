@@ -1,0 +1,24 @@
+.table-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.review-item {
+
+	// display: flex;
+	// align-items: flex-start;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 16px;
+
+}
+
+.stars {
+	display: flex; /* Make stars align horizontally */
+	list-style-type: none; /* Remove default list bullet points */
+	padding: 0; /* Remove padding from the list */
+	margin: 0; /* Remove margin from the list */
+  }

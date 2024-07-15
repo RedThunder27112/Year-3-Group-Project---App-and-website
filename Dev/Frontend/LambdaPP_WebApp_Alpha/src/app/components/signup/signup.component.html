@@ -1,0 +1,62 @@
+<section class="vh-100">
+    <div class="container py-5 h-200">
+        <h2 class="text-left"><span style="color: rgb(0, 24, 68);">Wild</span> <span style="color: rgb(205, 21, 67);">Task</span></h2>
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-md-8 col-lg-7 col-xl-6">
+            <img src="assets\undraw_Hiking_re_k0bc.png"
+              class="img-fluid" alt="Phone image">
+          </div>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+              <form [formGroup] = "signupForm">
+               <!-- Name input -->
+               <div class="form-outline mb-3">
+                  <!-- <label class="form-label" for="form1Example13"> Name: </label> -->
+                  <input formControlName="Name" type="text" id="regName" class="form-control" placeholder="name"/>
+                  <small *ngIf="signupForm.controls['Name'].dirty && signupForm.hasError('required', 'Name')" class="text-danger">*Name is Required! </small>
+                </div>
+  
+                <div class="form-outline mb-3">
+                  <!-- <label class="form-label" for="form1Example13">Surname: </label> -->
+                  <input formControlName="Surname" type="text" id="regSurname" class="form-control" placeholder="surname" required="true"/>
+                  <small *ngIf="signupForm.controls['Surname'].dirty && signupForm.hasError('required', 'Surname')" class="text-danger">*Surname is Required! </small>
+              </div>
+              
+              <!-- Email input -->
+              <!-- <div class="form-outline mb-3">
+                  <label class="form-label" for="form1Example13">Email Address: </label>
+                  <input formControlName="EmailAddress" type="email" id="regEmail" class="form-control" placeholder="email address" required="true"/>
+                  <small *ngIf="signupForm.controls['EmailAddress'].dirty && signupForm.hasError('required', 'EmailAddress')" class="text-danger">*Email is Required! </small>
+                  <small *ngIf="signupForm.hasError('email', 'EmailAddress')" class="text-danger">*Valid Email is Required! </small>
+              </div> -->
+  
+              <!-- Chosen username input -->
+              <div class="form-outline mb-3">
+                  <!-- <label class="form-label" for="form1Example13">Username: </label> -->
+                  <input formControlName="Username" type="text" id="regUsername" class="form-control" placeholder="username"/>
+                  <small *ngIf="signupForm.controls['Username'].dirty && signupForm.hasError('required', 'Username')" class="text-danger">*Username is Required! </small>
+              </div>
+    
+              <!-- Password input -->
+              <div class="form-outline mb-3">
+                  <!-- <label class="form-label" for="form1Example23">Password: </label> -->
+                <input formControlName="Password" type="password" id="regPassword" class="form-control" placeholder="password"/>
+                <small *ngIf="signupForm.controls['Password'].dirty && signupForm.hasError('required', 'Password')" class="text-danger">*Password is Required! </small>
+              </div>
+  
+              <!-- Confirm Password input -->
+              <div class="form-outline mb-3">
+                  <!-- <label class="form-label" for="form1Example23">Confirm Password: </label> -->
+                  <input formControlName="CPassword" type="password" id="regCPassword" class="form-control" placeholder="confirm password"/>
+                  <small *ngIf="signupForm.controls['CPassword'].dirty && signupForm.hasError('required', 'CPassword')" class="text-danger">*Password Confirmation is Required! </small>
+              </div>
+  
+              <div class="text-center align-items-center mt-3 mb-3">Already Registered? <a routerLink="">Login Here</a></div>
+    
+              <!-- Submit button -->
+              <button (click)="onSignUp()" type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  

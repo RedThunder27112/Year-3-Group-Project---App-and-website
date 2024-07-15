@@ -1,0 +1,48 @@
+<p-table
+  #dt1
+  dataKey="emp_ID"
+  [value]="employees"
+  [paginator]="false"
+  [rows]="5"
+  selectionMode="single"
+  responsiveLayout="stack"
+  styleClass="p-datatable-striped"
+  [showCurrentPageReport]="true"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Employees"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  [globalFilterFields]="['emp_Name', 'emp_Sur']"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Rating</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-e let-rowIndex="rowIndex">
+    <tr>
+      <td>
+        <img
+          [src]="e.emp_ID_Image"
+          [alt]="e.emp_Name"
+          width="100"
+          class="table-image"
+        />
+      </td>
+      <td style="font-size: medium">{{ e.emp_Name }} {{ e.emp_Sur }}</td>
+      <td style="font-size: medium">{{ e.emp_Role }}</td>
+      <td style="font-size: medium;"><i class="pi pi-star-fill" style="color: rgb(233, 209, 27)"></i> {{ e.emp_Rating }}</td>
+      <td *ngIf="supervisor != undefined"><b *ngIf="e.emp_ID == supervisor.emp_ID">Task Supervisor</b></td>
+
+      <!-- <td>
+        <p-rating
+          [ngModel]="e.emp_Rating"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+      </td> -->
+    </tr>
+  </ng-template>
+</p-table>

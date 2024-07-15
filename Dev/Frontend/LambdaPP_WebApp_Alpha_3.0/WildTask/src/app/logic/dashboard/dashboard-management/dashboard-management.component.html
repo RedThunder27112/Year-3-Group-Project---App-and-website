@@ -1,0 +1,475 @@
+<div class="grid p-fluid">
+    <div class="col-12 lg:col-6 xl:col-12 flex justify-content-between align-items-center">
+        <div></div>
+        <div class="mx-auto p-fluid">
+            <h3 class="text-center">Dashboard</h3>
+        </div>
+        <p-button class="p-button-rounded" [routerLink]="['charts']"><i
+                class="pi pi-chart-bar mr-2"></i>Reports</p-button>
+    </div>
+    <div class="col-12 lg:col-3 xl:col-3">
+        <div class="card mb-0" style="cursor: pointer;" (click)="op1.toggle($event)">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Tasks In Progress Today</span>
+                    <div class="text-900 font-medium text-xl" *ngIf="inProgressToday?.length != undefined">{{
+                        inProgressToday.length }}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center border-round"
+                    [ngStyle]="{width: '1.5rem', height: '1.5rem'}">
+                    <i class="pi pi-list text-blue-500 text-xl"></i>
+                </div>
+            </div>
+            <!-- <span class="text-green-500 font-medium">0 </span>
+            <span class="text-500">new updates</span> -->
+        </div>
+    </div>
+    <div class="col-12 lg:col-3 xl:col-3">
+        <div class="card mb-0" style="cursor: pointer;" (click)="op2.toggle($event)">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Tasks Completed Today</span>
+                    <div class="text-900 font-medium text-xl" *ngIf="completedToday?.length != undefined">{{
+                        completedToday.length }}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center border-round"
+                    [ngStyle]="{width: '3.5rem', height: '3.5rem'}">
+                    <i class="pi pi-check-circle text-green-500 text-xl"></i>
+                </div>
+            </div>
+            <!-- <span class="text-green-500 font-medium">0 </span>
+            <span class="text-500">new updates</span> -->
+        </div>
+    </div>
+    <div class="col-12 lg:col-3 xl:col-3">
+        <div class="card mb-0" style="cursor: pointer;" (click)="op3.toggle($event)">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Tasks Due Today</span>
+                    <div class="text-900 font-medium text-xl" *ngIf="dueToday?.length != undefined">{{dueToday.length}}
+                    </div>
+                </div>
+                <div class="flex align-items-center justify-content-center border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-stopwatch text-orange-500 text-xl"></i>
+                </div>
+            </div>
+            <!-- <span class="text-green-500 font-medium">0 </span>
+            <span class="text-500">new updates</span> -->
+        </div>
+    </div>
+    <div class="col-12 lg:col-3 xl:col-3">
+        <div class="card mb-0" style="cursor: pointer;" (click)="op4.toggle($event)">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Tasks Overdue Today</span>
+                    <div class="text-900 font-medium text-xl" *ngIf="overdueToday?.length != undefined">{{
+                        overdueToday.length }}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-flag-fill text-red-500 text-xl"></i>
+                </div>
+            </div>
+            <!-- <span class="text-green-500 font-medium">0 </span>
+            <span class="text-500">new updates</span> -->
+        </div>
+    </div>
+
+    <!-- <div class="col-12 lg:col-12 xl:col-12 mt-4">
+        <div class="card p-4">
+            <h5 class="text-center">Low Stock Report</h5>
+            <div class="flex">
+                <div class="text-center col-12 lg:col-6 xl:col-6" *ngFor="let s of stock">
+                    <div class="card" style="cursor: pointer;" #anchor [routerLink]="['../inventory/stock-edit', s.stock_ID]">
+                        <img [src]="s.stock_Image" alt="" style="height: 100px;">
+                        <h6>{{ s.stock_Name }}</h6>
+                        <div class="mt-3">
+                            <span>Current Quantity: {{ s.stock_Quantity }}</span>
+                        </div>
+                        <div>
+                            <span>Weekly Usage: {{ s.usage_Weekly }}</span>
+                        </div>
+                        <div>
+                            <span>Bi-Weekly Usage: {{ s.usage_Bi_Weekly }}</span>
+                        </div>
+                        <div>
+                            <span>Monthly Usage: {{ s.usage_Monthly }}</span>
+                        </div>
+
+                        <p-contextMenu [target]="anchor" [model]="menuItems"></p-contextMenu>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="flex col-12 lg:col-12 xl:col-12 mb-4">
+        <div class="col-12 lg:col-6 xl:col-6">
+            <div class="card scrollable">
+                <h5 class="text-center">Current Low Stock Items</h5>
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    <ng-container *ngFor="let s of stock">
+                        <li class="flex align-items-center py-2 border-bottom-1 surface-border"
+                            [routerLink]="['../inventory/stock-edit', s.stock_ID]" #anchor>
+                            <div class="mr-4">
+                                <img src="{{s.stock_Image}}" alt="" class="table-image-small">
+                            </div>
+                            <div class="d-flex">
+                                <div>
+                                    <span class="text-900 line-height-3" style="cursor: pointer;"><b>{{s.stock_Name}}
+                                        </b></span>
+                                </div>
+                                <div>
+                                    <span class="text-900 line-height-3" style="cursor: pointer;">Quantity Remaining:
+                                        {{s.stock_Quantity}} units</span>
+                                </div>
+                                <div *ngIf="s.Low_Stock.month">
+                                    <div *ngIf="s.Low_Stock.bi_Week else PurchaseInMonth">
+                                        <div *ngIf="s.Low_Stock.week else PurchaseIn2Week">
+                                            <span class="text-red-500 font-medium">Purchase {{ceil( s.Low_Stock.usage_Weekly * 1.1)}}  units this week!</span>
+                                        </div>
+                                        <ng-template #PurchaseIn2Week>
+                                            <span class="text-yellow-500 font-medium">Purchase {{ceil( s.Low_Stock.usage_Bi_Weekly * 1.1)}} units within 2 weeks!</span>
+                                        </ng-template>
+                                    </div>
+                                    <ng-template #PurchaseInMonth>
+                                        <span class="text-green-500 font-medium">Purchase {{ceil( s.Low_Stock.usage_Monthly * 1.1)}} units this month!</span>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </li>
+                        <p-contextMenu [target]="anchor" [model]="menuItems"></p-contextMenu>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col-12 lg:col-6 xl:col-6">
+            <div class="card scrollable">
+                <h5 class="text-center">Latest Updates</h5>
+                <!-- <span class="block text-600 font-medium mb-3">Top Rated</span> -->
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    <ng-container *ngFor="let t of taskUpdates">
+                        <li class="flex align-items-center py-2 border-bottom-1 surface-border"
+                            [routerLink]="['../tasks/task-updates/', t.task_ID]">
+                            <div class="mr-4">
+                                <img src="{{t.pic}}" alt="" class="table-image-small">
+                            </div>
+                            <span class="text-900 line-height-3" style="cursor: pointer;">{{t.task_Name}}: {{
+                                t.update_Description }} </span>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex col-12 lg:col-12 xl:col-12 mb-4">
+        <div class="col-12 lg:col-6 xl:col-6 mx-auto p-fluid">
+            <div class="card scrollable2">
+                <h5 class="text-center">Warnings</h5>
+                <!-- <span class="block text-600 font-medium mb-3">Top Rated</span> -->
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    <ng-container *ngFor="let t of taskWarnings">
+                        <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                            <!-- <div class="mr-4">
+                                <img src="{{t.emp_ID_Image}}" alt="" class="table-image-small">
+                            </div> -->
+                            <span class="text-900 line-height-3" style="cursor: pointer;"
+                                (click)="getWarnings(t.task_ID)"><span class="font-medium">{{t.task_Name}}</span> lacks employees with required skills!</span>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-12 lg:col-6 xl:col-6 mx-auto p-fluid">
+            <div class="card scrollable2">
+                <h5 class="text-center">Top & Bottom Rated Employees</h5>
+                <span class="block text-600 font-medium mb-3">Top Rated This Week</span>
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    <ng-container *ngFor="let t of topEm">
+                        <li class="flex align-items-center py-2 border-bottom-1 surface-border" [routerLink]="['../employees/employee/detail/',t.emp_ID]">
+                            <div class="mr-4">
+                                <img src="{{t.emp_ID_Image}}" alt="" class="table-image-small">
+                            </div>
+                            <span class="text-900 line-height-3" style="cursor: pointer;">{{t.emp_Name}} {{t.emp_Sur}}:
+                                {{ t.emp_Rating }}/5 </span>
+                        </li>
+                    </ng-container>
+                </ul>
+
+                <span class="block text-600 font-medium mb-3">Lowest Rated This Week</span>
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    <ng-container *ngFor="let t of bottomEm">
+                        <li class="flex align-items-center py-2 border-bottom-1 surface-border" [routerLink]="['../employees/employee/detail/',t.emp_ID]">
+                            <div class="mr-4">
+                                <img src="{{t.emp_ID_Image}}" alt="" class="table-image-small">
+                            </div>
+                            <span class="text-900 line-height-3" style="cursor: pointer;">{{t.emp_Name}} {{t.emp_Sur}}:
+                                {{ t.emp_Rating }}/5 </span>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-12 lg:col-12 xl:col-12 mb-4">
+        <div class="card flex p-4">
+            <div class="col-12 lg:col-9 xl:col-9 mx-auto p-fluid">
+                <div>
+                    <h5 class="text-center">Min/Max Ratios Per Activity</h5>
+
+                    <div class="flex justify-content-center mb-4">
+                        <p-dropdown [(ngModel)]="act" (click)="changeAct()" [options]="activities" placeholder="Select Activity"
+                            optionLabel="act_Name" [filter]="true" filterBy="act_Name" [showClear]="true">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2">                                    
+                                    <span>{{ act.act_Name }}</span>
+                                </div>
+                            </ng-template>
+                            <ng-template let-e pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <span>{{ e.act_Name }}</span>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+
+                    <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+                </div>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-6">
+                <div class="text-center mx-auto p-fluid">
+                    <h5>Number of Tasks</h5>
+                    <div class="flex justify-content-center mb-4">
+                        <p-button (click)="tasksThreeMonths()" class="p-button-rounded ml-3">3 months</p-button>
+                        <p-button (click)="taskSixMonths()" class="p-button-rounded ml-3">6 months</p-button>
+                        <p-button class="p-button-rounded ml-3">12 months</p-button>
+                    </div>
+
+                    <p-chart type="line" [data]="tasksBarData" [options]="tasksBarOptions"></p-chart>
+                </div>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-6">
+                <div class="flex flex-column align-items-center">
+                    <h5 class="text-center w-full mb-5">Task-Employee Ratio</h5>
+                    <p-chart type="pie" [data]="etPieData" [options]="pieOptions"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="col-12 lg:col-12 xl:col-12 mb-4">
+        <div class="card flex p-4">
+            <div class="col-12 lg:col-9 xl:col-9 mx-auto p-fluid">
+                <div class="text-center">
+                    <h5>Number of Tasks</h5>
+                    <div class="flex justify-content-center mb-4">
+                        <p-button (click)="tasksThreeMonths()" class="p-button-rounded ml-3">3 months</p-button>
+                        <p-button (click)="taskSixMonths()" class="p-button-rounded ml-3">6 months</p-button>
+                        <p-button class="p-button-rounded ml-3">12 months</p-button>
+                    </div>
+
+                    <p-chart type="line" [data]="tasksBarData" [options]="tasksBarOptions"></p-chart>
+                </div>
+            </div>
+            <div class="col-12 lg:col-6 xl:col-6">
+                <div class="flex flex-column align-items-center">
+                    <h5 class="text-center w-full mb-5">Admin, Contractor & Employee Ratio</h5>
+                    <p-chart type="pie" [data]="pieData" [options]="pieOptions"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <p-overlayPanel #op1 [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+            <p-table [value]="inProgressToday" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true"
+                [rows]="5" (onRowSelect)="op2.hide()" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    Tasks In Progress Today
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <!-- <th style="min-width:12rem" pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                        <th style="min-width:5rem">Image</th>
+                        <th style="min-width:8rem" pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th> -->
+
+                        <th>Name</th>
+                        <th>Activity</th>
+                        <th>Deadline</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-t>
+                    <tr [pSelectableRow]="t" [routerLink]="['../tasks/task-detail', t.task_ID]">
+                        <!-- <td>{{ t.task_Name }}</td>
+                        <td><img src="assets/demo/images/product/{{product.image}}" [alt]="product.image" width="50" class="shadow-2"/></td>
+                        <td>{{formatCurrency(product.price)}}</td> -->
+
+                        <td style="font-size: medium;"> {{ t.task_Name }} </td>
+                        <td style="font-size: medium;">{{ t.act_Name }}</td>
+                        <td style="font-size: medium;">{{ t.task_Deadline | date }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No tasks found.</td>
+                        <!-- <div class="text-center">
+                            <p-progressBar mode="indeterminate" [style]="{ height: 'px' }"></p-progressBar>
+                        </div> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="8">Loading task data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel>
+
+    <p-overlayPanel #op2 [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+            <p-table [value]="completedToday" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true"
+                [rows]="5" (onRowSelect)="op2.hide()" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    Tasks Completed Today
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <!-- <th style="min-width:12rem" pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                        <th style="min-width:5rem">Image</th>
+                        <th style="min-width:8rem" pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th> -->
+
+                        <th>Name</th>
+                        <th>Activity</th>
+                        <th>Deadline</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-t>
+                    <tr [pSelectableRow]="t" [routerLink]="['../tasks/task-detail', t.task_ID]">
+                        <!-- <td>{{ t.task_Name }}</td>
+                        <td><img src="assets/demo/images/product/{{product.image}}" [alt]="product.image" width="50" class="shadow-2"/></td>
+                        <td>{{formatCurrency(product.price)}}</td> -->
+
+                        <td style="font-size: medium;"> {{ t.task_Name }} </td>
+                        <td style="font-size: medium;">{{ t.act_Name }}</td>
+                        <td style="font-size: medium;">{{ t.task_Deadline | date }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No tasks found.</td>
+                        <!-- <div class="text-center">
+                            <p-progressBar mode="indeterminate" [style]="{ height: 'px' }"></p-progressBar>
+                        </div> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="8">Loading task data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel>
+
+    <p-overlayPanel #op3 [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+            <p-table [value]="dueToday" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true"
+                [rows]="5" (onRowSelect)="op2.hide()" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    Tasks Due Today
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <!-- <th style="min-width:12rem" pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                        <th style="min-width:5rem">Image</th>
+                        <th style="min-width:8rem" pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th> -->
+
+                        <th>Name</th>
+                        <th>Activity</th>
+                        <th>Deadline</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-t>
+                    <tr [pSelectableRow]="t" [routerLink]="['../tasks/task-detail', t.task_ID]">
+                        <!-- <td>{{ t.task_Name }}</td>
+                        <td><img src="assets/demo/images/product/{{product.image}}" [alt]="product.image" width="50" class="shadow-2"/></td>
+                        <td>{{formatCurrency(product.price)}}</td> -->
+
+                        <td style="font-size: medium;"> {{ t.task_Name }} </td>
+                        <td style="font-size: medium;">{{ t.act_Name }}</td>
+                        <td style="font-size: medium;">{{ t.task_Deadline | date }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No tasks found.</td>
+                        <!-- <div class="text-center">
+                            <p-progressBar mode="indeterminate" [style]="{ height: 'px' }"></p-progressBar>
+                        </div> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="8">Loading task data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel>
+
+    <p-overlayPanel #op4 [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+            <p-table [value]="overdueToday" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true"
+                [rows]="5" (onRowSelect)="op2.hide()" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    Overdue Tasks
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <!-- <th style="min-width:12rem" pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                        <th style="min-width:5rem">Image</th>
+                        <th style="min-width:8rem" pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th> -->
+
+                        <th>Name</th>
+                        <th>Activity</th>
+                        <th>Deadline</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-t>
+                    <tr [pSelectableRow]="t" [routerLink]="['../tasks/task-detail', t.task_ID]">
+                        <!-- <td>{{ t.task_Name }}</td>
+                        <td><img src="assets/demo/images/product/{{product.image}}" [alt]="product.image" width="50" class="shadow-2"/></td>
+                        <td>{{formatCurrency(product.price)}}</td> -->
+
+                        <td style="font-size: medium;"> {{ t.task_Name }} </td>
+                        <td style="font-size: medium;">{{ t.act_Name }}</td>
+                        <td style="font-size: medium;">{{ t.task_Deadline | date }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No Task Data To Display</td>
+                        <!-- <div class="text-center">
+                            <p-progressBar mode="indeterminate" [style]="{ height: 'px' }"></p-progressBar>
+                        </div> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="8">Loading task data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel>
+</div>

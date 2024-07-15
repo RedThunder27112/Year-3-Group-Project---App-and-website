@@ -1,0 +1,22 @@
+.mat-mdc-row:hover .mat-mdc-cell {
+    // border-color: rgb(253, 106, 130);
+    border-bottom: 2px solid rgb(112, 109, 252);
+    border-top: 2px solid rgb(112, 109, 252);
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    cursor: pointer;
+}
+
+.button-space {
+    margin-left: 10px; 
+}
+
+.table-image {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 55px; 
+    height: 55px; 
+    object-fit: cover;
+    border-radius: 50%; 
+}

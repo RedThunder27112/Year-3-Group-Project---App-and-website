@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\LambdaPP_WebAPI_Alpha.props" />
+</Project>

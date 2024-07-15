@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addtimelineupdate.AddTimelineUpdateFragment"
+    android:paddingLeft="@dimen/fragment_horizontal_margin"
+    android:paddingTop="@dimen/fragment_vertical_margin"
+    android:paddingRight="@dimen/fragment_horizontal_margin"
+    android:paddingBottom="@dimen/fragment_vertical_margin">
+
+    <LinearLayout
+        android:id="@+id/scrllayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/scrlStuff"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="50dp"
+            android:layout_weight="10">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/lblDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/maven_pro_medium"
+                    android:text="@string/description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/txtDescription"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/txtDescription"
+                    style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="location,description"
+                    android:background="@color/LightGrey"
+                    android:fontFamily="@font/maven_pro"
+                    android:hint="@string/describe_the_update"
+                    android:inputType="textLongMessage|textMultiLine"
+                    android:shadowColor="@color/PaleBlue"
+                    android:singleLine="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblDescription" />
+
+
+                <TextView
+                    android:id="@+id/lblPictures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="11dp"
+                    android:fontFamily="@font/maven_pro_medium"
+                    android:text="@string/pictures"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/btnAddPicture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+
+                <Button
+                    android:id="@+id/btnAddPicture"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/maven_pro_medium"
+                    android:text="@string/add_picture"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/lblLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/lblPictures"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <TextView
+                    android:id="@+id/lblLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:fontFamily="@font/maven_pro_medium"
+                    android:text="@string/location"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/rbLocation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnAddPicture" />
+
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/rbLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/maven_pro"
+                    android:text="@string/share_location"
+                    app:layout_constraintBottom_toTopOf="@+id/lblStatus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblLocation" />
+
+                <TextView
+                    android:id="@+id/lblStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/maven_pro_medium"
+                    android:text="@string/update_status_of_task"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rbLocation" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblStatus" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddTimelineUpdate"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/PastelRed"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/post_update"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

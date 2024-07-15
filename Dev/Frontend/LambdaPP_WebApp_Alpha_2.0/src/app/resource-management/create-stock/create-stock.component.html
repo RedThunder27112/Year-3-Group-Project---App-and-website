@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between mb-3">
+    <button (click)="goBack()" mat-raised-button color="accent" style="align-self: flex-start;">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>  
+        Back
+    </button>
+
+    <h2 style="text-align: center;">
+        Add New {{ resource }} Item
+    </h2>
+</div>
+
+<div class="mt-4">
+    <form [formGroup]="createStockForm" #formDirective="ngForm" (ngSubmit)="addToInventory(formDirective)">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" matInput>
+                    <mat-error style="color: red;" *ngIf="(createStockForm.controls['name'].touched || createStockForm.controls['name'].dirty) && createStockForm.hasError('required', 'name')">name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea formControlName="desc" matInput></textarea>
+                    <mat-error style="color: red;" *ngIf="(createStockForm.controls['desc'].touched || createStockForm.controls['desc'].dirty) && createStockForm.hasError('required', 'desc')">description is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12 mt-4">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>Quantity</mat-label>
+                    <input formControlName="quantity" type="number" matInput>
+                    <mat-error style="color: red;" *ngIf="(createStockForm.controls['quantity'].touched || createStockForm.controls['quantity'].dirty) && createStockForm.hasError('required', 'quantity')">quantity is required</mat-error>
+                    <!-- <mat-error style="color: red;" *ngIf="createStockForm.hasError('min', 'quantity')">quantity has to be greater than 0</mat-error> -->
+                    <mat-error style="color: red;" *ngIf="createStockForm.hasError('pattern', 'quantity')">quantity has to be a postive whole number</mat-error>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <button class="mt-4" mat-raised-button color="accent">Add {{ resource }}</button>
+    </form>
+
+    
+<!-- <div class="card flex justify-content-center">
+    <p-toast></p-toast>
+    <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize=1000000 (onUpload)="onUpload($event)"></p-fileUpload>
+</div> -->
+</div>

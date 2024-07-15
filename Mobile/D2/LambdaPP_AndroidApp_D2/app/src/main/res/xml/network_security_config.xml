@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config>
+        <trust-anchors>
+            <certificates src="system"/>
+            <!-- the below is nb to connect to the API! It tells it it can trust the api's certificate.
+             It reads the certificate in the raw folder.
+             If we need to change the certificate in the future, the process is either:
+             Find the API in your browser, press the little lock icon by the https, and from there you can download
+             the certificate
+
+             or you can use openssl in the command line in that folder:
+             openssl s_client -connect localhost:7112 -showcerts | openssl x509 -outform PEM > localhost.crt
+             -->
+
+        </trust-anchors>
+    </base-config>
+    <!-- not allowing cleartext traffic for security, we're using https. But if we need to, this should work
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <trust-anchors>
+            <certificates src="@raw/localhost"/>
+        </trust-anchors>
+    </domain-config>-->
+</network-security-config>

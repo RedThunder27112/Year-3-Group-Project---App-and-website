@@ -1,0 +1,66 @@
+<div class="flex justify-content-between mb-4">
+<button style="height:2.5rem" routerLink="../employee-overview" pButton pRipple type="button"
+    class="p-button-raised p-button-secondary">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    <div style="margin-left: 1rem;">Back</div>
+</button>
+
+<div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="grid">
+    <div class="col-12">
+        <h3> Employee Checker </h3>
+        <div class="card flex justify-content-between">
+            <div>
+                <p-dropdown [(ngModel)]="employee1" (click)="getEmpOne()" [options]="employees" [filter]="false" placeholder="First Employee"
+                    optionLabel="emp_Name" [showClear]="true">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="employee1.emp_ID_Image" [alt]="employee1.emp_Name" class="table-image">
+                            <span>{{ employee1.emp_Name }} {{ employee1.emp_Sur }}</span>
+                        </div>
+                    </ng-template>
+                    <ng-template let-e pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="e.emp_ID_Image" [alt]="e.emp_Name" class="table-image">
+                            <span>{{ e.emp_Name }} {{ e.emp_Sur }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+
+                <div class="card flex flex-column align-items-center mt-4">
+                    <h5 class="text-left w-full">Skill Chart</h5>
+                    <p-chart type="radar" width="520px" [data]="radar1Data" [options]="radar1Options"></p-chart>
+                </div>
+            </div>
+            
+            <div>
+                <p-dropdown [(ngModel)]="employee2" (click)="getEmpTwo()" [options]="employees" [filter]="false" placeholder="Second Employee"
+                    optionLabel="emp_Name" [showClear]="true">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="employee2.emp_ID_Image" [alt]="employee2.emp_Name" class="table-image">
+                            <span>{{ employee2.emp_Name }} {{ employee2.emp_Sur }}</span>
+                        </div>
+                    </ng-template>
+                    <ng-template let-e pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="e.emp_ID_Image" [alt]="e.emp_Name" class="table-image">
+                            <span>{{ e.emp_Name }} {{ e.emp_Sur }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+
+                <div class="card flex flex-column align-items-center mt-4">
+                    <h5 class="text-left w-full">Skill Chart</h5>
+                    <p-chart type="radar" [responsive]="true" width="520px" [data]="radar2Data" [options]="radar2Options"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

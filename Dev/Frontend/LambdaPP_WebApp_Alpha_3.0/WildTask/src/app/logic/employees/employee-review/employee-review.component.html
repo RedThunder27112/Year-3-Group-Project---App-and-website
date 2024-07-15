@@ -1,0 +1,215 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" (click)="goBack()" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="grid">
+    <div class="col-12">
+        
+        <div class="card">
+            <div *ngIf="rating != undefined">
+                <table *ngIf="employee != null" >
+                    <tr>
+                        <th>
+                            <img [src]="employee.emp_ID_Image" [alt]="employee.emp_Name" class="med-image mr-3"/>
+                        </th>
+                        <!-- <th><p-avatar [image]="employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar></th> -->
+                        <th> <h3> Review of: {{ employee.emp_Name }} {{ employee.emp_Sur }}</h3> </th>
+                    </tr>
+                </table>
+                <br><br>
+                <div class="flex justify-content-between mr-5" *ngIf="rating.reviewer != null">
+                    <div>
+                        <h4>
+                            Reviewed on:<span class="mt-1 text-600"> {{ betterDate(rating.rating_Date) }} </span>  
+                        </h4>
+                        <h4 *ngIf="rating.task != null">
+                            For Task: <span class="mt-1 text-600">{{ rating.task.task_Name}}</span>   
+                        </h4>
+                        
+                                     
+                        <div> <h4>Rating: <span class="mt-1 text-600">{{ rating.rating_Rating }}/5</span></h4></div>
+                        <div class="ml-3">
+                            <!--<ul *ngFor="let starNum of starNumbers">
+                                <li *ngIf="starNum < employee.emp_Rating else elseEmptyStar"><i class="pi pi-star-fill" style="color: rgb(233, 209, 27); width: 100px"></i></li>
+                                <ng-template #elseEmptyStar><li><i class="pi pi-star-fill" style="color: rgb(184, 179, 142); width: 100px"></i></li></ng-template>
+                            </ul>--> 
+
+                            <ul class="stars">
+                                <li *ngFor="let starNum of starNumbers">
+                                    <i class="pi pi-star-fill" [ngStyle]="{ color: starNum < rating.rating_Rating ? 'rgb(233, 209, 27)' : 'rgb(184, 179, 142)' }"></i>
+                                </li>
+                            </ul>
+                            <br>
+                        </div> 
+
+                        <div>
+                            <div class="mb-2"*ngIf="rating.rating_Comment != ''">
+                                <h4>Comment:</h4> 
+                                    <div class="mt-1 text-600 ml-3">{{  rating.rating_Comment }} <p-tag  [value]="getRatingCategory(rating.rating_Category)" [severity]="getSeverity(rating.rating_Category) "></p-tag></div>  
+                                <div *ngIf="getRatingCategory(rating.rating_Category) == 'UNDEFINED'">
+                                    <br> Suggested Category:
+                                    <span *ngIf="changingCategory==false else SelectCategory">
+                                         <p-tag  [value]="getSuggestedCategory(rating.rating_ID)" [severity]="suggestedSeverity"></p-tag>  <br><br>
+                                        <div class = "ml-3" >
+                                            <button (click)="saveSuggestion()" pButton pRipple type="button" style="height: 1rem;" class="p-button-raised p-button-primary">Save</button>
+                                            <button (click)="changingCategory=true" pButton pRipple type="button" style="height: 1rem;" class="p-button-raised p-button-primary ml-3">Change</button>
+                                        </div>
+                                    </span>
+                                    <ng-template #SelectCategory class = "ml-3" >
+                                        <p-tag  [value]="getRatingCategory(1)" [severity]="getSeverity(1)" (click)="saveCategory(1)" class="tagbtn"></p-tag>
+                                        <p-tag  [value]="getRatingCategory(2)" [severity]="getSeverity(2)" (click)="saveCategory(2)" class="tagbtn ml-3"></p-tag>
+                                        <p-tag  [value]="getRatingCategory(3)" [severity]="getSeverity(3)" (click)="saveCategory(3)" class="tagbtn ml-3"></p-tag>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div *ngIf="rating.rating_Comment == ''"><h4>Comment:  <span class="mt-1 text-600">N/A</span></h4></div>        
+                        </div>
+                    </div>
+                    <div>
+                       <table>
+                            <tr>
+                                <th>
+                                    <img [src]="rating.reviewer.emp_ID_Image" [alt]="rating.reviewer.emp_Name" width="100" class="med-image mr-3"/>
+                                </th>
+                                <!-- <th><p-avatar [image]="employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar></th> -->
+                                <th> <h3> Reviewer: {{ rating.reviewer.emp_Name }} {{ rating.reviewer.emp_Sur }}</h3> </th>
+                            </tr>
+                        </table>  
+                    </div>
+                </div>
+
+                <div>               
+                    
+                    <!--Ratings:-->
+                    <div> 
+                        
+                        <br>
+                    </div>
+                   
+                   <div class="mb-8" *ngIf="rating.rating_Comment != ''">
+                    <label htmlFor="city"><h4>Similar reviews:</h4></label>
+                   
+                    <div class="mb-8" *ngIf="SimilarRatingsCount > 0 else elseRatingsBlock">
+
+                        <div class="mt-3" *ngIf="showMoreSimilarReviews == false else showMoreReviews">
+                            <p-dataView #dv1 [value]="MostSimilarRatings" [paginator]="false" [rows]="5" [sortField]="sortField"
+                                [sortOrder]="sortOrder" layout="grid" filterBy="rating_Date">
+                                    <ng-template let-e pTemplate="gridItem">              
+                                        <div class="review-item m-4 col-2" style="cursor: pointer;" (click)="redirect(e.rating_ID)">
+                                            
+                                            <div class="mb-2"*ngIf="e.rating_Comment != '' else NoCommentHeading" class="flex justify-content-between mr-2">
+                                                <h5> <div *ngIf="e.task != null">{{e.task.activity.act_Name}}:  {{ e.task.task_Name }} </div></h5>
+                                                <div><p-tag  [value]="getRatingCategory(e.rating_Category)" [severity]="getSeverity(e.rating_Category) "></p-tag></div>
+                                            </div>
+                                            <ng-template #NoCommentHeading> <h5> <div *ngIf="e.task != null">{{e.task.activity.act_Name}}:  {{ e.task.task_Name }} </div></h5></ng-template>
+                                                
+                                            <div *ngIf="e.employee != null"><span class="text-900 font-medium mb-1 md:mb-0">Review of:</span> {{ e.employee.emp_Name }} {{ e.employee.emp_Sur }}</div>
+                                            <div *ngIf="e.reviewer != null"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Reviewer:</span> {{  e.reviewer.emp_Name }} {{  e.reviewer.emp_Sur }}</p></div>                  
+                                            On {{ betterDate(e.rating_Date) }}   
+                                            <div>   
+                                                <br>                          
+                                                <!--<p-avatar [image]="up.employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar>-->
+                                                <div class="mb-2"*ngIf="e.rating_Comment != ''"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Comment:</span> {{  e.rating_Comment }}</p></div>
+                                                <div *ngIf="e.rating_Comment == ''"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Comment:</span> N/A</p></div>         
+                                            </div>      
+                                                
+                                            <div class="mt-2 md:mt-0 flex align-items-center">
+                                                <div class="surface-300 border-round overflow-hidden w-10rem lg:w-15rem" [ngStyle]="{height: '8px'}">
+                                                    <div *ngIf="e.rating_Rating == 1" class="bg-red-500 h-full" [ngStyle]="{width: '20%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 2" class="bg-yellow-500 h-full" [ngStyle]="{width: '40%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 3" class="bg-orange-500 h-full" [ngStyle]="{width: '60%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 4" class="bg-cyan-500 h-full" [ngStyle]="{width: '80%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 5" class="bg-green-500 h-full" [ngStyle]="{width: '100%'}"></div>
+                                                </div>
+        
+                                                <span class="text-black-500 ml-3 font-medium">Rated {{ e.rating_Rating }}/5</span>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-dataView>
+                            <button style="height:2.5rem" pButton pRipple type="button" class="p-button-raised p-button-secondary" (click)="showMoreSimilarReviews = true">Show More Reviews</button>
+                        </div>
+                        <ng-template #showMoreReviews>
+                        
+                            <div class="mt-3">
+                                <p-dataView #dv2 [value]="SimilarRatings" [paginator]="true" [rows]="10" [sortField]="sortField"
+                                [sortOrder]="sortOrder" layout="grid" filterBy="rating_Date">
+                                    <ng-template pTemplate="header">
+                                        <div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+                                            <p-dropdown [options]="activityOptions" placeholder="Filter Activity"
+                                                (onChange)="onFilterChange($event, dv2)"></p-dropdown>
+                                            <p-dropdown [options]="sortOptions" placeholder="Sorted By Most Recent"
+                                                (onChange)="onSortChange($event)"></p-dropdown>
+                                        </div>
+                                        <span class="text-black-500 ml-3 font-medium"><div *ngIf="selectedActivity != null">
+                                            Average rating for {{selectedActivity.act_Name}}: {{selectedActivityAvgRating | number:'1.0-2'}}
+                                            <ul class="stars">
+                                                <li *ngFor="let starNum of starNumbers">
+                                                    <i class="pi pi-star-fill" [ngStyle]="{ color: starNum < selectedActivityAvgRating ? 'rgb(233, 209, 27)' : 'rgb(184, 179, 142)' }"></i>
+                                                </li>
+                                            </ul>
+                                            </div></span>
+                                    </ng-template>
+                                    <ng-template let-e pTemplate="gridItem">              
+                                        <div class="review-item m-4 col-2" style="cursor: pointer;" (click)="redirect(e.rating_ID)">
+                                            
+                                            <div class="mb-2"*ngIf="e.rating_Comment != '' else NoCommentHeading2" class="flex justify-content-between mr-2">
+                                                <h5> <div *ngIf="e.task != null">{{e.task.activity.act_Name}}:  {{ e.task.task_Name }} </div></h5>
+                                                <div><p-tag  [value]="getRatingCategory(e.rating_Category)" [severity]="getSeverity(e.rating_Category) "></p-tag></div>
+                                            </div>
+                                            <ng-template #NoCommentHeading2> <h5> <div *ngIf="e.task != null">{{e.task.activity.act_Name}}:  {{ e.task.task_Name }} </div></h5></ng-template>
+                                                
+                                            <div *ngIf="e.employee != null"><span class="text-900 font-medium mb-1 md:mb-0">Review of:</span> {{ e.employee.emp_Name }} {{ e.employee.emp_Sur }}</div>
+                                            <div *ngIf="e.reviewer != null"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Reviewer:</span> {{  e.reviewer.emp_Name }} {{  e.reviewer.emp_Sur }}</p></div>                  
+                                            On {{ betterDate(e.rating_Date) }}   
+                                            <div>   
+                                                <br>                          
+                                                <!--<p-avatar [image]="up.employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar>-->
+                                                <div class="mb-2"*ngIf="e.rating_Comment != ''"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Comment:</span> {{  e.rating_Comment }}</p></div>
+                                                <div *ngIf="e.rating_Comment == ''"><p class=""><span class="text-900 font-medium mb-1 md:mb-0">Comment:</span> N/A</p></div>         
+                                            </div>      
+                                                
+                                            <div class="mt-2 md:mt-0 flex align-items-center">
+                                                <div class="surface-300 border-round overflow-hidden w-10rem lg:w-15rem" [ngStyle]="{height: '8px'}">
+                                                    <div *ngIf="e.rating_Rating == 1" class="bg-red-500 h-full" [ngStyle]="{width: '20%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 2" class="bg-yellow-500 h-full" [ngStyle]="{width: '40%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 3" class="bg-orange-500 h-full" [ngStyle]="{width: '60%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 4" class="bg-cyan-500 h-full" [ngStyle]="{width: '80%'}"></div>
+                                                    <div *ngIf="e.rating_Rating == 5" class="bg-green-500 h-full" [ngStyle]="{width: '100%'}"></div>
+                                                </div>
+        
+                                                <span class="text-black-500 ml-3 font-medium">Rated {{ e.rating_Rating }}/5</span>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-dataView>
+                            </div>
+                        </ng-template>
+                    
+                    </div>
+                    <ng-template #elseRatingsBlock> <label htmlFor="city"><h4>No similar ratings yet!</h4></label></ng-template>
+                    </div>
+                    
+
+                </div>
+                <br>
+                
+                
+                <!--<button [routerLink]="['../edit-employee']" pButton pRipple type="button" style="height: 2.5rem;" class="p-button-raised p-button-secondary">
+                    <i class="fa fa-plus" aria-hidden="true"></i> 
+                    <div style="margin-left: 1rem;">Edit Employee</div> 
+                </button>-->
+    
+            </div>
+        </div>
+    </div>
+</div>

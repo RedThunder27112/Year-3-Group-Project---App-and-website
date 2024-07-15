@@ -1,0 +1,53 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../tasks']" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<h3>Task Setup</h3>
+<h5>Please select an option from below: </h5>
+
+<div class="grid p-fluid">
+    <div class="col-12 lg:col-12 xl:col-12" style="cursor: pointer;" [routerLink]="['../task-templates']">
+        <div class="card mb-3">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-900 font-medium mb-3 text-xl">Task Templates</span>
+                    <div class="text-500 font-medium text-xl">
+                        Create a task using a predefined template
+                    </div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-red-100 border-round"
+                    [ngStyle]="{width: '5.5rem', height: '5.5rem'}">
+                    <i class="pi pi-th-large text-red-500 text-xl"></i>
+                </div>
+            </div>
+            <span class="text-green-500 font-medium"></span>
+            <span class="text-500"></span>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-12 xl:col-12" style="cursor: pointer;" [routerLink]="['../task-steps/create-task']">
+        <div class="card mb-3">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-900 font-medium mb-3 text-xl">Create New Task</span>
+                    <div class="text-500 font-medium text-xl">
+                        Create a task from scratch
+                    </div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '5.5rem', height: '5.5rem'}">
+                    <i class="pi pi-pencil text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

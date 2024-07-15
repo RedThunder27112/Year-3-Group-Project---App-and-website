@@ -1,0 +1,189 @@
+<!-- <div class="button-group">
+    <button mat-raised-button class="custom-button" color="accent">Create New Task</button>
+    <button mat-raised-button class="custom-button" color="accent">View All Tasks</button>
+    <button mat-raised-button class="custom-button" color="accent">Button 3</button>
+    <button mat-raised-button class="custom-button" color="accent">Button 4</button>
+    <button mat-raised-button class="custom-button" color="accent">Button 5</button>
+  </div> -->
+
+<div class="d-flex justify-content-between mb-3">
+  <mat-form-field appearance="outline">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="e.g. Survey"
+      #input
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div>
+    <mat-form-field appearence="fill">
+      <mat-label>Status</mat-label>
+      <mat-select (selectionChange)="onStatus($event)">
+        <mat-option (click)="reset()">None</mat-option>
+        <mat-option value="assigned">Assigned</mat-option>
+        <mat-option value="completed">Completed</mat-option>
+        <mat-option value="in progress">In Progress</mat-option>
+        <mat-option value="awaiting review">Awaiting Review</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearence="fill">
+      <mat-label>Activity</mat-label>
+      <mat-select (selectionChange)="onActivity($event)">
+        <mat-option (click)="reset()">None</mat-option>
+        <mat-option *ngFor="let act of activities" [value]="act.act_Name">
+          {{ act.act_Name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button (click)="goToCreateActivity()" mat-raised-button color="accent">
+      <i class="fa fa-plus"></i>
+      Add New Activity
+    </button>
+    <span class="button-space"></span>
+    <button (click)="goToCreateTask()" mat-raised-button color="accent">
+      <i class="fa fa-plus"></i>
+      Add New Task
+    </button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8">
+  <table matSort mat-table [dataSource]="dataSource">
+    <!-- ID Column -->
+    <!-- <ng-container matColumnDef="tID">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Task ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.task_ID}} </td>
+      </ng-container>   -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="tName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.task_Name }}</td>
+    </ng-container>
+
+    <!-- Surname Column -->
+    <!-- <ng-container matColumnDef="tDesc">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.task_Description}} </td>
+      </ng-container> -->
+
+    <!-- Username Column -->
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.task_Date_Started | date }}
+      </td>
+    </ng-container>
+
+    <!-- Deadline Column -->
+    <ng-container matColumnDef="deadlineDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Deadline</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.task_Deadline | date }}
+      </td>
+    </ng-container>
+
+    <!-- Activity Column -->
+    <ng-container matColumnDef="activity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Activity</th>
+      <td mat-cell *matCellDef="let element">{{ element.act_Name }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.status.status_Name }}
+      </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-stroked-button
+          [routerLink]="['../task-detail', element.task_ID]"
+          color="primary"
+        >
+          <i class="fa fa-eye"></i> View Details
+        </button>
+        <span class="button-space"></span>
+        <!-- <button mat-stroked-button
+          [routerLink]="['../task-detail', element.task_ID]"
+          color="primary"
+        >
+          <i class="fa fa-pencil"></i> Edit
+        </button> -->
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="goToTaskUpdate(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of employees"
+  >
+  </mat-paginator>
+</div>
+
+<!-- <div class="card" style="margin-top: 20px">
+  <p-table
+    #dt1
+    dataKey="task_ID"
+    [value]="tasks"
+    [paginator]="true"
+    [rows]="5"
+    responsiveLayout="stack"
+    styleClass="p-datatable-striped"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 50]"
+    [globalFilterFields]="['task_Name', 'status.status_Name']"
+  >
+    <ng-template pTemplate="caption">
+       Tasks
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th pSortableColumn="task_Name">Name <p-sortIcon field="task_Name"></p-sortIcon></th>
+        <th pSortableColumn="act">Activity</th>
+        <th pSortableColumn="start">Start Date</th>
+        <th pSortableColumn="dead">Deadline</th>
+        <th pSortableColumn="status">Status</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-t>
+      <tr>
+        <td>{{ t.task_Name }}</td>
+        <td>{{ t.act_Name }}</td>
+        <td>{{ t.task_Date_Started | date }}</td>
+        <td>{{ t.task_Deadline | date }}</td>
+        <td>{{ t.status.status_Name }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button type="button" styleClass="p-button-text"></p-button>
+  </ng-template>
+  <ng-template pTemplate="paginatorright">
+      <p-button type="button" styleClass="p-button-text"></p-button>
+  </ng-template>
+  </p-table>
+</div> -->

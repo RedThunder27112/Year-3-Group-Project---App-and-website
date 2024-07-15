@@ -1,0 +1,14 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" (click)="goBack()" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div>
+    <p-toast></p-toast>
+    <p-steps class="mb-4" [model]="items" [readonly]="false"></p-steps>
+</div>
+<router-outlet></router-outlet>

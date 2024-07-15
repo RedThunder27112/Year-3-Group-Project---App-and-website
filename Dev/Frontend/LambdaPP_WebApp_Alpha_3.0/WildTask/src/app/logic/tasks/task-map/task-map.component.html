@@ -1,0 +1,61 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../task-sites']" pButton pRipple type="button"
+        class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <div style="margin-left: 1rem;">Back</div>
+    </button>
+
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<h3>Add New Task Site</h3>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12">
+                    <label htmlFor="lastname2">Location Name</label>
+                    <input [(ngModel)]="locationName" pInputText id="lastname2" type="text" />
+                </div>            
+
+            <div class="field flex mx-auto p-fluid text-center">
+                <google-map [options]="mapOptions" height="400px" width="750px" class="mt-2"
+                    (mapClick)="eventHandler($event,'mapClick')" 
+                    (mapDblclick)="eventHandler($event,'mapDblclick')">
+                    
+                    <map-marker #markerElem="mapMarker" *ngFor="let marker of markers" [position]="marker.position"
+                        [label]="locationName" [title]="marker.title" [options]="marker.options"
+                        (mapClick)="dropMarker($event)">
+                    </map-marker>
+
+                </google-map>
+            </div>
+
+            
+            <div class="field col-12 md:col-12">
+                <label htmlFor="lastname2">Latitude</label>
+                <input [readOnly]="true" [(ngModel)]="lat" pInputText id="lastname2" type="text" />
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <label htmlFor="lastname2">Longitude</label>
+                <input [readOnly]="true" [(ngModel)]="long" pInputText id="lastname2" type="text" />
+            </div>
+
+            <div class="field mt-5 w-3 mx-auto p-fluid" >
+                <p-toast></p-toast>
+                <button pButton type="button" (click)="createLocation()"
+                class="field p-button-rounded mx-auto">
+                <div class="mx-auto p-fluid">
+                    Add Location
+                </div>
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

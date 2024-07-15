@@ -1,0 +1,167 @@
+
+<div class="grid">
+    <div class="col-12">
+        <h3>Task Confirmation</h3>
+        <div class="card">
+            <div class="field col-12 md:col-12">
+                <label htmlFor="lastname2">Task Name</label>
+                <div class="d-flex">
+                    <h5>{{ formData.form.taskname }}</h5>
+                </div>
+            </div>
+            
+            <div class="field col-12 md:col-12">
+                <label htmlFor="lastname2">Task Description</label>
+                <div class="d-flex">
+                    <h5>{{ formData.form.taskdesc }}</h5>
+                </div>
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <label htmlFor="lastname2">Activity</label>
+                <div class="d-flex">
+                    <h5>{{ formData.form.activity.act_Name }}</h5>
+                </div>
+                <div class="d-flex mt-1 text-red-600 ml-4" *ngIf="formData.form.activity.act_Recommended_Min_Emps_Per_Task > formData.employees.length">
+                     Only {{formData.employees.length}} employees assigned to the task, but the recommended minimum for {{ formData.form.activity.act_Name }} is {{formData.form.activity.act_Recommended_Min_Emps_Per_Task}}
+                </div>
+                <div class="d-flex mt-1 text-red-600 ml-4" *ngIf="formData.form.activity.act_Recommended_Max_Emps_Per_Task < formData.employees.length">
+                    {{formData.employees.length}} employees are assigned to the task, but the recommended maximum for {{ formData.form.activity.act_Name }} is {{formData.form.activity.act_Recommended_Max_Emps_Per_Task}}
+                </div>
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="city">Start Date</label>
+                <div class="d-flex">
+                    <h5>{{ formData.form.startdate | date }}</h5>
+                </div>
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="city">End Date</label>
+                <div class="d-flex">
+                    <h5>{{ formData.form.deadline | date }}</h5>
+                </div>
+            </div>
+
+            <!--<div class="field col-12 md:col-12">
+                <label htmlFor="city">Skills</label>
+                <div class="d-flex">
+                    <ng-container *ngFor="let s of formData.form.skills">
+                        <h5>{{ s.skill_Name }}</h5>
+                    </ng-container>
+                </div>
+            </div>-->
+            <div class="field col-12">
+                <label htmlFor="city">Skills</label>
+
+                <div *ngIf="formData.form.skills.length > 0 else elseNoSkillsBlock">
+
+                    <div class="mt-3">
+                        <ul class="list-none p-0 m-0">
+                            
+                                <li *ngFor="let s of selected_skills" class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                                    <div>
+                                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0 ml-3">{{ s.skill_Name }}</span>
+                                        <div class="mt-1 text-600 ml-3">{{ s.skill_Description }} </div>
+                                        <!--Breakdown the skills level we actually have assigned to the task-->
+                                        <div *ngIf="s.Employee_Skill_Bridges != undefined else elseNoEmployeesWithSkillsBlock">
+                                            <div *ngFor="let bridge of s.Employee_Skill_Bridges">
+                                                <br>
+                                                <div>
+                                                    <table>
+                                                        <tr>
+                                                            <th><img [src]="bridge.employee.emp_ID_Image" [alt]="bridge.employee.emp_Name" width="10" class="small-image mr-3 ml-8"/> </th>
+                                                            <th>
+                                                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">{{bridge.employee.emp_Name}} {{bridge.employee.emp_Sur}}</span> 
+                                                            <span class="mt-1 font-medium text-600">is qualified at level </span>
+                                                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">{{bridge.skill_Level}}</span>
+                                                            </th>
+                                                        </tr>
+                                                    </table> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ng-template #elseNoEmployeesWithSkillsBlock>
+                                            <br>
+                                            <span class="mt-1 text-red-600 ml-4">No Employee selected has this skill!</span>
+                                        </ng-template>
+
+                                    </div>
+                                    <!--<div class="mt-2 md:mt-0 flex align-items-center">
+                                        <div class="surface-300 border-round overflow-hidden w-10rem lg:w-15rem" [ngStyle]="{height: '8px'}">
+                                            <div *ngIf="e.level == 1" class="bg-red-500 h-full" [ngStyle]="{width: '20%'}"></div>
+                                            <div *ngIf="e.level == 2" class="bg-yellow-500 h-full" [ngStyle]="{width: '40%'}"></div>
+                                            <div *ngIf="e.level == 3" class="bg-orange-500 h-full" [ngStyle]="{width: '60%'}"></div>
+                                            <div *ngIf="e.level == 4" class="bg-cyan-500 h-full" [ngStyle]="{width: '80%'}"></div>
+                                            <div *ngIf="e.level == 5" class="bg-green-500 h-full" [ngStyle]="{width: '100%'}"></div>
+                                        </div>
+
+                                        <span class="text-black-500 ml-3 font-medium">Level {{ e.level }}</span>
+                                    </div>-->
+                                </li>
+                                <hr>
+                            
+                        </ul>
+
+                    </div>
+                   
+                </div>
+                <ng-template #elseNoSkillsBlock> <label htmlFor="city"><h4>No skills assigned to this task.</h4></label></ng-template>
+
+            </div>
+
+
+            <div class="field col-12 md:col-12">
+                <label htmlFor="city">Employees</label>
+                <div class="d-flex" *ngIf="formData.form.tasksupervisor != '' else noSupervisor">
+                    <h5>Supervisor: {{ formData.form.tasksupervisor.emp_Name }} {{ formData.form.tasksupervisor.emp_Sur }} </h5>
+                    <ng-container *ngFor="let e of formData.employees">
+                        <h5 *ngIf="formData.form.tasksupervisor.emp_ID != e.emp_ID">{{ e.emp_Name }} {{ e.emp_Sur }} </h5>
+                    </ng-container>
+                </div>
+                <ng-template class="d-flex" #noSupervisor>
+                    <ng-container *ngFor="let e of formData.employees">
+                        <h5>{{ e.emp_Name }} {{ e.emp_Sur }} </h5>
+                    </ng-container>
+                </ng-template>
+                
+                <div *ngIf="issues.length > 0">
+                    <ng-container *ngFor="let s of issues">
+                        <div class="mt-1 text-red-600 ml-4">{{s}}</div>
+                    </ng-container>
+                </div>
+            </div>
+            <div *ngIf="formData.form.location != ''" class="field col-12 md:col-12">
+                <label htmlFor="city">Location</label>
+                <div class="d-flex">
+                    <h5>{{ formData.form.location.loc_Name }}</h5>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="field mt-5 w-3 mx-auto p-fluid">
+            <p-toast></p-toast>
+            <div class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                <div>
+                    <button (click)="createTemplate()" pButton type="button"
+                    class="field p-button-rounded mx-auto">
+                    <div class="mx-auto p-fluid">
+                        Save As Template
+                    </div>
+                    </button>
+                </div>
+
+                <div>
+                    <button (click)="createTask()" pButton type="button"
+                    class="field p-button-rounded mx-auto">
+                    <div class="mx-auto p-fluid">
+                        Create Task
+                    </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

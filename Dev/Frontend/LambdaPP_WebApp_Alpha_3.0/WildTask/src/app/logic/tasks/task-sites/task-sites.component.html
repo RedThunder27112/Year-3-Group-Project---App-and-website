@@ -1,0 +1,41 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../tasks']" pButton pRipple type="button"
+        class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <div style="margin-left: 1rem;">Back</div>
+    </button>
+
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="flex justify-content-between mt-4">
+    <h3>Task Sites</h3>
+    <button style="height:2.5rem" [routerLink]="['../task-map']" pButton pRipple type="button"
+        class="p-button-raised p-button">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <div style="margin-left: 1rem;">Add New Task Site</div>
+    </button>
+</div>
+
+<section class="timeline-section">
+    <ng-container *ngFor="let up of taskSites">
+        <div class="timeline-item" (click)="locationShow(up.loc_Coordinates)" style="cursor: pointer;">
+            <div class="flex justify-content-between mr-5">
+                <div class="flex align-items-center">      
+                    <img src="assets/mapMark.jpg" alt="" width="50px">
+                    <h4 class="">{{ up.loc_Name }}</h4>
+                </div>
+                <!-- <div>
+                    <button (click)="locationShow(up.loc_Coordinates)" pButton>
+                        <i class="fa fa-map-marker mr-2" aria-hidden="true"></i>
+                        View Location
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </ng-container>
+</section>

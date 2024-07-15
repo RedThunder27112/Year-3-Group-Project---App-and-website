@@ -1,0 +1,36 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../skills']" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<div class="grid">
+    <div class="col-12">
+        <form>
+            <h3>Add New Skill</h3>
+            <div class="d-flex card p-fluid">
+                <div class="field mb-3">
+                    <label htmlFor="email1">Skill Name</label>
+                    <input [(ngModel)]="skillName" name="name" pInputText type="text"/>
+                </div>
+                <div class="field mb-3">
+                    <label htmlFor="email1">Skill Description</label>
+                    <textarea [(ngModel)]="skillDesc" name="desc" pInputText type="text"></textarea>
+                </div>
+            </div>
+        
+            <div class="mt-5 w-3 mx-auto p-fluid">
+                <p-toast></p-toast>
+                <button (click)="createSkill()" pButton pRipple type="button" label="Add Skill"
+                    class="p-button-rounded"></button>
+            </div>
+        </form>
+	</div>
+</div>

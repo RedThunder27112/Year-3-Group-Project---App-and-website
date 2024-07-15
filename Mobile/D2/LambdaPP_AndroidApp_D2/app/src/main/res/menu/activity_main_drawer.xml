@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/current_tasks"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_completed_tasks"
+            android:icon="@drawable/completed_tasks"
+            android:title="@string/completed_tasks" />
+        <item
+            android:id="@+id/nav_userinfoParent"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/menu_profile" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/calendar"
+            android:title="@string/menu_calendar" />
+        <item
+            android:id="@+id/nav_requestApproval"
+            android:icon="@drawable/ic_admin_only"
+            android:title="@string/handle_requests"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/menu_logout" />
+    </group>
+</menu>

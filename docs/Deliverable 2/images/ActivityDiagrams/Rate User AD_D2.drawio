@@ -1,0 +1,84 @@
+<mxfile host="app.diagrams.net" modified="2023-04-23T14:18:40.395Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="BwK7dmnlW0ikErSgCk40" version="21.1.8">
+  <diagram name="Page-1" id="SZynWhFS7VVxWRjN1Tua">
+    <mxGraphModel dx="250" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GacNlh7acyNOvctkBSCM-18" value="User" style="swimlane;startSize=20;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="740" width="320" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-19" value="Input Fellow Users Ratings" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-18">
+          <mxGeometry x="100" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-20" value="Supervisor" style="swimlane;startSize=20;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2110" y="740" width="320" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-21" value="Input User Rating" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-20">
+          <mxGeometry x="100" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-22" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="GacNlh7acyNOvctkBSCM-20">
+          <mxGeometry x="145" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-23" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" parent="GacNlh7acyNOvctkBSCM-20" source="GacNlh7acyNOvctkBSCM-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-24" value="Task Management Subsystem" style="swimlane;startSize=20;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="740" width="320" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-25" value="Notify User of&amp;nbsp; Ratings Needed" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-24">
+          <mxGeometry x="90" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-26" value="Notify Administrator of User Rating Needed" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-24">
+          <mxGeometry x="90" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="GacNlh7acyNOvctkBSCM-24" source="GacNlh7acyNOvctkBSCM-28" target="GacNlh7acyNOvctkBSCM-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-28" value="Update User Rating" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-24">
+          <mxGeometry x="90" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-29" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="GacNlh7acyNOvctkBSCM-24">
+          <mxGeometry x="260" y="405" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-30" value="Administrator" style="swimlane;startSize=20;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1790" y="740" width="320" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-31" value="Input User Rating" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-30">
+          <mxGeometry x="90" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-26" target="GacNlh7acyNOvctkBSCM-31">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1620" y="970" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-21" target="GacNlh7acyNOvctkBSCM-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-31" target="GacNlh7acyNOvctkBSCM-25">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1940" y="1050" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-25" target="GacNlh7acyNOvctkBSCM-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-19" target="GacNlh7acyNOvctkBSCM-28">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1310" y="1160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-37" value="Users can be Employees, or Contractors." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=24;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="750" width="100" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.updateUserDetails.UpdateProfile">
+
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/scrlStuff"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="10">
+
+            <LinearLayout
+                android:id="@+id/scrllayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgUser"
+        android:layout_width="145dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/loading_background"
+        android:contentDescription="@string/user_profile_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/lblUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/username"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:labelFor="@id/txtUsername"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgUser" />
+
+
+    <EditText
+        android:id="@+id/txtUsername"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:fontFamily="@font/maven_pro"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblUsername"
+        android:autofillHints="emailAddress" />
+
+
+    <TextView
+        android:id="@+id/lblName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/name"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsername"
+        android:labelFor="@id/txtName"
+        tools:layout_editor_absoluteY="275dp" />
+
+    <EditText
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:contentDescription="@string/first_name"
+        android:fontFamily="@font/maven_pro"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblName"
+        android:autofillHints="firstName,name"
+        android:inputType="textPersonName" />
+
+
+    <TextView
+        android:id="@+id/lblSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/surname"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:labelFor="@id/txtSurname"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+    <EditText
+        android:id="@+id/txtSurname"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:fontFamily="@font/maven_pro"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSurname"
+        android:autofillHints="Surname"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/password"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:labelFor="@id/txtPassword"
+        app:layout_constraintTop_toBottomOf="@+id/txtSurname" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:fontFamily="@font/maven_pro"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPassword"
+        android:autofillHints="Password" />
+
+    <TextView
+        android:id="@+id/lblPassword2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/confirm_password"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:labelFor="@id/lblPassword2"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+    <EditText
+        android:id="@+id/txtPassword2"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:fontFamily="@font/maven_pro"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPassword2"
+        android:autofillHints="Password" />
+
+    <Button
+        android:id="@+id/btnUploadProfile"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/upload_profile_picture"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    <Button
+        android:id="@+id/btnUpdateDetails"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/PastelRed"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/update_details"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-between mb-3">
+    <button (click)="goBack()" mat-raised-button color="accent">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>  
+        Back   
+    </button>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <!-- <div>
+        <mat-form-field appearence="fill">
+          <mat-label>Status</mat-label>
+          <mat-select>
+            <mat-option>None</mat-option>
+            <mat-option value="all">All</mat-option>
+            <mat-option value="assigned">Assigned</mat-option>
+            <mat-option value="completed">Completed</mat-option>
+            <mat-option value="in progress">In Progress</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+</div>
+
+<section class="timeline-section">
+  <div class="timeline-items mb-8" *ngIf="taskUpdates != undefined">
+    <ng-container *ngFor="let up of taskUpdates.reverse()">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">
+          {{ betterDate(up.update_Time) }}
+          <div class="content-wrapper mt-3">
+            <p class="">Posted by {{ up.employee.emp_Name }} {{ up.employee.emp_Sur }}</p>
+            <img [src]="up.employee.emp_ID_Image" class="rounded-circle" style="width: 50px; height: 50px; margin-left: 15px;">
+          </div>
+        </div>
+        <div class="timeline-content">
+          <h3>{{ up.update_Description }}</h3>
+        
+          <div class="mt-4">
+            <button *ngIf="up.update_Location != null" (click)="locationShow(up.update_Location)" mat-flat-button color="accent">
+              <mat-icon>location_on</mat-icon>
+              Location
+            </button>
+            <span style="margin-left: 10px;"></span>
+            <button mat-flat-button color="accent">
+              <mat-icon>collections</mat-icon>
+              Pictures
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template [ngIf]="this.taskUpdates != undefined">
+      <ng-template [ngIf]="this.taskUpdates.length == 0">
+        <div>
+          No Updates as yet, you'll be notified if a new update comes along!
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
+</section>
+
+

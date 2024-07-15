@@ -1,0 +1,58 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../inventory']" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<form [formGroup]="createStockForm">
+
+    <div class="d-flex card p-fluid">
+        <h5>Add New Item</h5>
+
+        <div class="field mb-3  p-fluid">
+            <p-toast></p-toast>
+            <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="false" accept="image/*"> 
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{ file.name }}</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+        </div>
+
+        <div class="field mb-3">
+            <label htmlFor="email1">Name</label>
+            <input pInputText id="email1" type="text" formControlName="name"/>
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="email1">Description</label>
+            <textarea pInputText id="email1" type="text" rows="2" cols="2" formControlName="desc"></textarea>
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="email1">Quantity</label>
+            <input pInputText id="email1" type="number" formControlName="quantity"/>
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="name1">Category</label>
+            <p-dropdown 
+            [options]="['Stock', 'Equipment']" 
+            placeholder="Select a Category" 
+            [showClear]="true"
+            formControlName="category">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="mt-5 w-3 mx-auto p-fluid">
+        <p-toast></p-toast>
+        <button (click)="addToInventory()" pButton pRipple type="button" label="Add New Item"
+            class="p-button-rounded"></button>
+    </div>
+</form>
+

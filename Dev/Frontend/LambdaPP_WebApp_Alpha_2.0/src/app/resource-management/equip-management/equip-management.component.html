@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between mb-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="e.g. Survey" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  
+    <div>
+      <mat-form-field appearence="fill">
+        <mat-label>Status</mat-label>
+        <mat-select>
+          <mat-option>None</mat-option>
+          <mat-option value="assigned">Assigned</mat-option>
+          <mat-option value="completed">Completed</mat-option>
+          <mat-option value="in progress">In Progress</mat-option>
+          <mat-option value="awaiting review">Awaiting Review</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <button (click)="goToCreateEquip()" mat-raised-button color="accent">
+        <i class="fa fa-plus"></i>
+        Add New Equipment
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 mb-4" *ngFor="let e of equipment">
+      <mat-card class="product-card">
+        <mat-card-header>
+          <p>{{ e.eqp_Name }}</p>
+        </mat-card-header>
+        <img mat-card-image [src]="e.eqp_Image" alt="Stock Image" style="width: 150px;"/>
+        <mat-card-content>
+          <p>Available Quantity: {{ e.eqp_Quantity_Total }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            (click)="goToEquip(e.eqp_ID)"
+            mat-raised-button
+            color="primary"
+          >
+            View
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>

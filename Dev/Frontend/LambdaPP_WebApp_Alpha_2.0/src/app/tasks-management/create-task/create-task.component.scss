@@ -1,0 +1,32 @@
+mat-form-field {
+    width: 100%;
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+  
+.example-radio-button {
+    margin: 5px;
+}
+
+.table-image {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 55px;
+    height: 55px;
+    object-fit: cover; 
+    border-radius: 50%; 
+}
+
+.custom-button {
+    // font-weight: bold;
+    font-size: 16px;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+  

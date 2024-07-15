@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\LamdbdaPP_WebAPI_Alpha.props" />
+</Project>

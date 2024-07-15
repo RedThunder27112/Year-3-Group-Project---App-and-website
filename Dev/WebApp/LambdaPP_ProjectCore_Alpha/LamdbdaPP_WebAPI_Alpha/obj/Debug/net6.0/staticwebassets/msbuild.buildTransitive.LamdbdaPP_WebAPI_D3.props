@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\LamdbdaPP_WebAPI_D3.props" />
+</Project>

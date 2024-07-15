@@ -1,0 +1,39 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../employees']" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+<form [formGroup]="createEmployeeCodeForm">
+
+    <h3>Onboard New Employee</h3>
+    <div class="d-flex card p-fluid">
+        <div class="field mb-3">
+            <label htmlFor="email1">Email</label>
+            <input pInputText id="email1" type="text" formControlName="email" />
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="name1">Role</label>
+            <p-dropdown [options]="roles" placeholder="Select a Role" [showClear]="true" formControlName="role">
+            </p-dropdown>
+        </div>
+        <div class="field" [hidden]="this.createEmployeeCodeForm.value?.role != 'Contractor'">
+            <label htmlFor="age1">Contractor Expiry Date</label>
+            <p-calendar formControlName="contractor_expiry" dateFormat="DD, dd/mm/yy" [showIcon]="true"></p-calendar>
+        </div>
+    </div>
+
+    <div class="mt-5 w-3 mx-auto p-fluid">
+        <p-toast></p-toast>
+        <button (click)="getRegistrationCode()" pButton pRipple type="button" label="Onboard Employee"
+            class="p-button-rounded"></button>
+    </div>
+
+</form>

@@ -1,0 +1,27 @@
+mat-form-field {
+    width: 100%;
+}
+
+.mat-table {
+    border-collapse: separate!important;
+    border-spacing:0 4px!important;
+  }
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.example-radio-button {
+    margin: 5px;
+}
+
+.table-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+

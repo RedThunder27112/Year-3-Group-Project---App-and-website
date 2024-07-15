@@ -1,0 +1,51 @@
+<div class="layout-topbar">
+    <!-- <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button> -->
+
+    <div class="layout-topbar-logo" [routerLink]="['dashboard']" style="cursor: pointer;">
+        <img src="assets/logo3.png" alt="logo">
+        <span>WildTask</span>
+    </div>
+
+    <!-- <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button> -->
+
+    <app-menu></app-menu>
+    
+    <div #topbarmenu class="layout-topbar-menu">                
+        <!-- <button class="p-link layout-topbar-button">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </button> -->
+
+        <!-- <div class="flex"></div> -->
+
+        <div class="flex align-items-center" style="cursor: pointer;">
+            <!-- <p-avatar [image]="employee.emp_ID_Image" styleClass="mr-2" size="xlarge" shape="circle" [routerLink]="['profile']"></p-avatar> -->
+            <img [src]="employee.emp_ID_Image" [alt]="employee.emp_Name" width="100" class="table-image mr-3" [routerLink]="['profile']"/>
+            <h5 *ngIf="employee != undefined"  [routerLink]="['profile']">
+                {{employee.emp_Name}} {{employee.emp_Sur}}
+            </h5>
+
+            <button class="p-link layout-topbar-button" [routerLink]="['dashboard/calendar']">
+                <i class="pi pi-calendar text-3xl"></i>
+                <span>Calendar</span>
+            </button>
+
+            <div class="ml-3" *ngIf="badgeValInt > 0" [routerLink]="['dashboard/requests']">
+                <i class="pi pi-bell text-3xl" pBadge [value]="badgeVal"></i>
+            </div>
+
+            <div class="ml-3" *ngIf="badgeValInt == 0" [routerLink]="['dashboard/requests']">
+                <i class="pi pi-bell text-3xl"></i>
+            </div>
+
+            <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
+            <button class="p-link layout-topbar-button" (click)="menu.toggle($event)" [routerLink]="">
+                <i class="fa fa-ellipsis-v"></i>
+            </button>
+        </div>
+    </div>
+</div>

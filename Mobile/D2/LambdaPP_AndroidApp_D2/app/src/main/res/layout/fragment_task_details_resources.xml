@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/fragment_horizontal_margin"
+    android:paddingTop="@dimen/fragment_vertical_margin"
+    android:paddingRight="@dimen/fragment_horizontal_margin"
+    android:paddingBottom="@dimen/fragment_vertical_margin"
+    tools:context=".ui.login.LoginFragment">
+
+    <TextView
+        android:id="@+id/lblStockHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/stock_neededheading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblStockText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/background_light"
+        android:fontFamily="@font/maven_pro"
+        android:text="@string/loading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblStockHeading"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/btnAddStock"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:contentDescription="@string/add_stock_button"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintEnd_toEndOf="@+id/lblStockText"
+        app:layout_constraintTop_toBottomOf="@+id/lblStockText"
+        app:tint="@color/DarkestPaleBlue" />
+
+    <TextView
+        android:id="@+id/lblEquipmentHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/maven_pro_medium"
+        android:text="@string/equipment_neededheading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblStockText" />
+
+    <TextView
+        android:id="@+id/lblEquipmentText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/background_light"
+        android:fontFamily="@font/maven_pro"
+        android:text="@string/loading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEquipmentHeading"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/btnAddEquipment"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:contentDescription="@string/add_equipment_button"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintEnd_toEndOf="@+id/lblEquipmentText"
+        app:layout_constraintTop_toBottomOf="@+id/lblEquipmentText"
+        app:tint="@color/DarkestPaleBlue" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

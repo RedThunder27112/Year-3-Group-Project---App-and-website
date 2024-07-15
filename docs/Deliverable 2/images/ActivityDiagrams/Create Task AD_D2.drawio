@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net" modified="2023-04-23T14:17:03.831Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="300XZFfWRRjp4zKFI7bD" version="21.1.8">
+  <diagram name="Page-1" id="SZynWhFS7VVxWRjN1Tua">
+    <mxGraphModel dx="1100" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GacNlh7acyNOvctkBSCM-1" value="Administrator" style="swimlane;" vertex="1" parent="1">
+          <mxGeometry x="870" y="540" width="320" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-2" value="Input Task Paramaters" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-1">
+          <mxGeometry x="95" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-3" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="GacNlh7acyNOvctkBSCM-1">
+          <mxGeometry x="140" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-4" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="GacNlh7acyNOvctkBSCM-1" source="GacNlh7acyNOvctkBSCM-3" target="GacNlh7acyNOvctkBSCM-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-5" value="Select User for Task(s)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-1">
+          <mxGeometry x="95" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-6" value="Task Creation Subsystem" style="swimlane;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="540" width="430" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-7" value="Recommend Suitable User(s)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-6">
+          <mxGeometry x="50" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" edge="1" parent="GacNlh7acyNOvctkBSCM-6" source="GacNlh7acyNOvctkBSCM-9" target="GacNlh7acyNOvctkBSCM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-9" value="Notify User(s) of Task Assignment" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-6">
+          <mxGeometry x="270" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" edge="1" parent="GacNlh7acyNOvctkBSCM-6" source="GacNlh7acyNOvctkBSCM-11" target="GacNlh7acyNOvctkBSCM-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-11" value="Add User(s) to Task" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="GacNlh7acyNOvctkBSCM-6">
+          <mxGeometry x="80" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-12" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;fontSize=12;" vertex="1" parent="GacNlh7acyNOvctkBSCM-6">
+          <mxGeometry x="315" y="230" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-14" target="GacNlh7acyNOvctkBSCM-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-14" value="Parameters:&lt;br&gt;Task Name&lt;br&gt;Task Requirements&lt;br&gt;Stock Needed" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="1">
+          <mxGeometry x="720" y="615" width="120" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-2" target="GacNlh7acyNOvctkBSCM-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1240" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-7" target="GacNlh7acyNOvctkBSCM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GacNlh7acyNOvctkBSCM-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" edge="1" parent="1" source="GacNlh7acyNOvctkBSCM-5" target="GacNlh7acyNOvctkBSCM-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1240" y="880" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1020" y="880" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

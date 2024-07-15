@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\LambdaPP_WebAPI_Alpha.props" />
+</Project>

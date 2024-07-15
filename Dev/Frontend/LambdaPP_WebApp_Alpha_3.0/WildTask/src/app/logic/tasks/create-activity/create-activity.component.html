@@ -1,0 +1,64 @@
+<div class="flex justify-content-between mb-4">
+    <button style="height:2.5rem" [routerLink]="['../../tasks']" pButton pRipple type="button" class="p-button-raised p-button-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        <div style="margin-left: 1rem;">Back</div> 
+    </button>
+  
+    <div></div>
+     <button *ngIf="!isEdit" [routerLink]="['./edit']" pButton pRipple type="button" style="height: 2.5rem;"
+        class="p-button ml-2">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <div style="margin-left: 1rem;">Edit Activity</div>
+    </button>
+</div>
+
+<div class="mb-3">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+</div>
+
+
+<form [formGroup]="createActForm">
+
+    <h3 *ngIf="!isEdit">Create New Activity</h3>
+    <h3 *ngIf="isEdit">Edit Activity</h3>
+
+    <div  *ngIf="isEdit" class="d-flex card p-fluid">
+        <label htmlFor="firstname2">Activity</label>
+        <p-dropdown formControlName="activity" (onChange)="setAct()" [options]="activities" optionLabel="act_Name"
+            [filter]="true" filterBy="act_Name" placeholder="Select an Activity" [showClear]="true">
+        </p-dropdown>
+    </div>
+
+    <div class="d-flex card p-fluid">
+        <div class="field mb-3">
+            <label htmlFor="name">Name</label>
+            <input pInputText id="name" type="text" formControlName="name" />
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="desc">Description</label>
+            <textarea pInputText id="desc" type="text" formControlName="desc" rows="2" cols="2" > </textarea>
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="minEmps">Minimum Employees Recommended For A Task</label>
+            <p-inputNumber  id="minEmps" type="number" formControlName="minEmps" [min]="0" [max]="50" [showButtons]="true"> </p-inputNumber>
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="maxEmps">Maximum Employees Recommended For A Task</label>
+            <p-inputNumber  id="maxEmps" type="number" formControlName="maxEmps" [min]="0" [max]="50" [showButtons]="true"> </p-inputNumber>
+            <!--<div class="text-center">
+                <small style="color: red;" *ngIf="none_selected">Maximum should be above minimum</small>
+            </div>-->
+        </div>
+        <div class="field mb-3">
+            <label htmlFor="maxTasks">Maximum Tasks Per Employee</label>
+            <p-inputNumber  id="maxTasks" type="number" formControlName="maxTasks" [min]="0" [max]="50" [showButtons]="true"> </p-inputNumber>
+        </div>
+    </div>
+
+    <div class="mt-5 w-3 mx-auto p-fluid">
+        <p-toast></p-toast>
+        <button (click)="createActivity()" pButton pRipple type="button" label="Create Activity"
+            class="p-button-rounded"></button>
+    </div>
+</form>
+

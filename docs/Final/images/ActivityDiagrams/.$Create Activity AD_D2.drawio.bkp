@@ -1,0 +1,57 @@
+<mxfile host="app.diagrams.net" modified="2023-04-23T14:14:51.304Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="tEpiDHWIeHwVUKhEooa3" version="21.1.8">
+  <diagram name="Page-1" id="SZynWhFS7VVxWRjN1Tua">
+    <mxGraphModel dx="978" dy="498" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="h6KquulT3G0brklWmBdW-36" value="Administrator" style="swimlane;" parent="1" vertex="1">
+          <mxGeometry x="640" y="430" width="320" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-37" value="Input Activity Paramaters" style="rounded=1;whiteSpace=wrap;html=1;" parent="h6KquulT3G0brklWmBdW-36" vertex="1">
+          <mxGeometry x="95" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-38" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" parent="h6KquulT3G0brklWmBdW-36" vertex="1">
+          <mxGeometry x="140" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-39" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="h6KquulT3G0brklWmBdW-36" source="h6KquulT3G0brklWmBdW-38" target="h6KquulT3G0brklWmBdW-37" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-44" value="Task Creation Subsystem" style="swimlane;" parent="1" vertex="1">
+          <mxGeometry x="960" y="430" width="320" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" parent="h6KquulT3G0brklWmBdW-44" source="h6KquulT3G0brklWmBdW-46" target="h6KquulT3G0brklWmBdW-72" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-46" value="Create Activity" style="rounded=1;whiteSpace=wrap;html=1;" parent="h6KquulT3G0brklWmBdW-44" vertex="1">
+          <mxGeometry x="50" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-43" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;fontSize=12;" parent="h6KquulT3G0brklWmBdW-44" vertex="1">
+          <mxGeometry x="240" y="245" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="h6KquulT3G0brklWmBdW-44" source="h6KquulT3G0brklWmBdW-72" target="h6KquulT3G0brklWmBdW-43" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-72" value="Assign Tasks to Activity" style="rounded=1;whiteSpace=wrap;html=1;" parent="h6KquulT3G0brklWmBdW-44" vertex="1">
+          <mxGeometry x="50" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" source="h6KquulT3G0brklWmBdW-61" target="h6KquulT3G0brklWmBdW-37" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-61" value="Parameters:&lt;br&gt;Name&lt;br&gt;Description&lt;br&gt;Tasks" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="490" y="505" width="120" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" parent="1" source="h6KquulT3G0brklWmBdW-37" target="h6KquulT3G0brklWmBdW-46" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;endArrow=none;endFill=0;" parent="1" source="h6KquulT3G0brklWmBdW-70" target="h6KquulT3G0brklWmBdW-46" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h6KquulT3G0brklWmBdW-70" value="An Activity can have many tasks associated with it.&lt;br&gt;eg Activity: Build Wall&lt;br&gt;Task: Mix Cement,&lt;br&gt;Task: Transport Bicks" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="1320" y="505" width="150" height="130" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
